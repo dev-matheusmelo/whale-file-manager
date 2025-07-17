@@ -49,6 +49,9 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_lineEdit_search_textChanged(const QString &arg1);
+
+
 private:
     void show_libs();
     void show_volumes();

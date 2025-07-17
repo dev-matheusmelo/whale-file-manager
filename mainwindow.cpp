@@ -277,3 +277,16 @@ void MainWindow::on_pushButton_2_clicked()
     }
 }
 
+
+void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
+{
+
+    QString search_text = arg1;
+    ui->listWidget_files->clear();
+    foreach(auto copy,current_dir.entryList()){
+        if(copy.contains(search_text)){
+            ui->listWidget_files->addItem(copy);
+        }
+    }
+}
+

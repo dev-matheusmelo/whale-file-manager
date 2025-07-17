@@ -40,6 +40,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButton_make_folder;
     QPushButton *pushButton_make_file;
+    QLineEdit *lineEdit_search;
     QListWidget *listWidget_files;
     QPushButton *pushButton_2;
     QHBoxLayout *horizontalLayout_4;
@@ -138,6 +139,13 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_2);
 
+        lineEdit_search = new QLineEdit(centralwidget);
+        lineEdit_search->setObjectName("lineEdit_search");
+        lineEdit_search->setStyleSheet(QString::fromUtf8(""));
+        lineEdit_search->setClearButtonEnabled(true);
+
+        verticalLayout_2->addWidget(lineEdit_search);
+
         listWidget_files = new QListWidget(centralwidget);
         listWidget_files->setObjectName("listWidget_files");
         listWidget_files->setMouseTracking(false);
@@ -208,6 +216,9 @@ public:
         pushButton_go->setText(QCoreApplication::translate("MainWindow", "GO", nullptr));
         pushButton_make_folder->setText(QCoreApplication::translate("MainWindow", "MAKE FOLDER", nullptr));
         pushButton_make_file->setText(QCoreApplication::translate("MainWindow", "MAKE FILE", nullptr));
+        lineEdit_search->setInputMask(QString());
+        lineEdit_search->setText(QString());
+        lineEdit_search->setPlaceholderText(QCoreApplication::translate("MainWindow", "Search", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "RENAME", nullptr));
         pushButton_move->setText(QCoreApplication::translate("MainWindow", "Move", nullptr));
         pushButton_pastemove->setText(QCoreApplication::translate("MainWindow", "Paste move", nullptr));

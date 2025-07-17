@@ -143,6 +143,25 @@
        </layout>
       </item>
       <item>
+       <widget class="QLineEdit" name="lineEdit_search">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="inputMask">
+         <string/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>Search</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QListWidget" name="listWidget_files">
         <property name="mouseTracking">
          <bool>false</bool>
