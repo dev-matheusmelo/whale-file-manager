@@ -1,0 +1,28 @@
+{
+	"BUILD_DIR" : "/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/build/Desktop_Qt_6_9_1-Debug/whale-file-manager_autogen",
+	"CMAKE_BINARY_DIR" : "/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/build/Desktop_Qt_6_9_1-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/build/Desktop_Qt_6_9_1-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager",
+	"CMAKE_SOURCE_DIR" : "/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/build/Desktop_Qt_6_9_1-Debug/whale-file-manager_autogen/include",
+	"INPUTS" : 
+	[
+		"/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/assets/imagens/file.png",
+		"/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/assets/imagens/folder2.png",
+		"/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/assets/imagens/file2.ico",
+		"/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/assets/imagens/fateGrand-Order-Saber-Sakura.jpg"
+	],
+	"LOCK_FILE" : "/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/build/Desktop_Qt_6_9_1-Debug/CMakeFiles/whale-file-manager_autogen.dir/AutoRcc_assets_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "assets" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_assets.cpp",
+	"RCC_EXECUTABLE" : "/home/ziguser/Qt/6.9.1/gcc_64/libexec/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/build/Desktop_Qt_6_9_1-Debug/CMakeFiles/whale-file-manager_autogen.dir/AutoRcc_assets_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/assets.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

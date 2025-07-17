@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/assets/imagens">
+        <file>assets/imagens/fateGrand-Order-Saber-Sakura.jpg</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>assets/imagens/folder2.png</file>
+        <file>assets/imagens/file.png</file>
+        <file>assets/imagens/file2.ico</file>
+    </qresource>
+</RCC>
