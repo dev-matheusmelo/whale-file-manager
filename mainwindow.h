@@ -47,6 +47,8 @@ private slots:
 
     void on_pushButton_pastemove_clicked();
 
+    void on_pushButton_2_clicked();
+
 private:
     void show_libs();
     void show_volumes();

@@ -260,3 +260,20 @@ void MainWindow::on_pushButton_pastemove_clicked()
     }
 }
 
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    QString rename = QInputDialog::getText(this,"Rename to","new name:");
+    if(rename != ""){
+        QString current_file = ui->listWidget_files->currentItem()->text();
+        QString full_path = current_dir.path() + "/" + current_file;
+        QString full_path_rename = current_dir.path() + "/" + rename;
+        QProcess process;
+        QStringList args = {full_path,full_path_rename};
+        process.start("mv",args);
+        if(process.waitForFinished()){
+            show_dir(current_dir.path());
+        }
+    }
+}
+

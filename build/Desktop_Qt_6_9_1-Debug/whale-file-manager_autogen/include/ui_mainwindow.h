@@ -41,6 +41,7 @@ public:
     QPushButton *pushButton_make_folder;
     QPushButton *pushButton_make_file;
     QListWidget *listWidget_files;
+    QPushButton *pushButton_2;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *pushButton_move;
     QPushButton *pushButton_pastemove;
@@ -147,6 +148,11 @@ public:
 
         verticalLayout_2->addWidget(listWidget_files);
 
+        pushButton_2 = new QPushButton(centralwidget);
+        pushButton_2->setObjectName("pushButton_2");
+
+        verticalLayout_2->addWidget(pushButton_2);
+
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName("horizontalLayout_4");
         pushButton_move = new QPushButton(centralwidget);
@@ -202,6 +208,7 @@ public:
         pushButton_go->setText(QCoreApplication::translate("MainWindow", "GO", nullptr));
         pushButton_make_folder->setText(QCoreApplication::translate("MainWindow", "MAKE FOLDER", nullptr));
         pushButton_make_file->setText(QCoreApplication::translate("MainWindow", "MAKE FILE", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "RENAME", nullptr));
         pushButton_move->setText(QCoreApplication::translate("MainWindow", "Move", nullptr));
         pushButton_pastemove->setText(QCoreApplication::translate("MainWindow", "Paste move", nullptr));
         pushButton_copy->setText(QCoreApplication::translate("MainWindow", "Copy", nullptr));
