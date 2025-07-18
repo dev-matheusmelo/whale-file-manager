@@ -48,7 +48,6 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "on_listWidget_libs_itemDoubleClicked",
         "on_pushButton_make_folder_clicked",
         "on_pushButton_make_file_clicked",
-        "on_pushButton_clicked",
         "on_pushButton_addcustom_clicked",
         "on_listWidget_custom_itemDoubleClicked",
         "on_listWidget_files_customContextMenuRequested",
@@ -57,6 +56,7 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "on_pushButton_paste_clicked",
         "on_pushButton_move_clicked",
         "on_pushButton_pastemove_clicked",
+        "on_pushButton_clicked",
         "on_pushButton_2_clicked",
         "on_lineEdit_search_textChanged",
         "arg1",
@@ -82,25 +82,25 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_make_file_clicked'
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_clicked'
-        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_addcustom_clicked'
-        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_listWidget_custom_itemDoubleClicked'
-        QtMocHelpers::SlotData<void(QListWidgetItem *)>(12, 2, QMC::AccessPrivate, QMetaType::Void, {{
+        QtMocHelpers::SlotData<void(QListWidgetItem *)>(11, 2, QMC::AccessPrivate, QMetaType::Void, {{
             { 0x80000000 | 3, 4 },
         }}),
         // Slot 'on_listWidget_files_customContextMenuRequested'
-        QtMocHelpers::SlotData<void(const QPoint &)>(13, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::QPoint, 14 },
+        QtMocHelpers::SlotData<void(const QPoint &)>(12, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QPoint, 13 },
         }}),
         // Slot 'on_pushButton_copy_clicked'
-        QtMocHelpers::SlotData<void()>(15, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_paste_clicked'
-        QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(15, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_move_clicked'
-        QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_pastemove_clicked'
+        QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButton_clicked'
         QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_2_clicked'
         QtMocHelpers::SlotData<void()>(19, 2, QMC::AccessPrivate, QMetaType::Void),
@@ -143,14 +143,14 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 3: _t->on_listWidget_libs_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
         case 4: _t->on_pushButton_make_folder_clicked(); break;
         case 5: _t->on_pushButton_make_file_clicked(); break;
-        case 6: _t->on_pushButton_clicked(); break;
-        case 7: _t->on_pushButton_addcustom_clicked(); break;
-        case 8: _t->on_listWidget_custom_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
-        case 9: _t->on_listWidget_files_customContextMenuRequested((*reinterpret_cast< std::add_pointer_t<QPoint>>(_a[1]))); break;
-        case 10: _t->on_pushButton_copy_clicked(); break;
-        case 11: _t->on_pushButton_paste_clicked(); break;
-        case 12: _t->on_pushButton_move_clicked(); break;
-        case 13: _t->on_pushButton_pastemove_clicked(); break;
+        case 6: _t->on_pushButton_addcustom_clicked(); break;
+        case 7: _t->on_listWidget_custom_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 8: _t->on_listWidget_files_customContextMenuRequested((*reinterpret_cast< std::add_pointer_t<QPoint>>(_a[1]))); break;
+        case 9: _t->on_pushButton_copy_clicked(); break;
+        case 10: _t->on_pushButton_paste_clicked(); break;
+        case 11: _t->on_pushButton_move_clicked(); break;
+        case 12: _t->on_pushButton_pastemove_clicked(); break;
+        case 13: _t->on_pushButton_clicked(); break;
         case 14: _t->on_pushButton_2_clicked(); break;
         case 15: _t->on_lineEdit_search_textChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 16: _t->on_pushButton_save_custom_clicked(); break;

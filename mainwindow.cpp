@@ -14,22 +14,17 @@
 #include "QInputDialog"
 #include "qmenu.h"
 #include "QProcess"
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget *parent,QString dir)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    current_dir.setPath(dir);
     ui->lineEdit_path->setText(current_dir.path());
-
-    show_dir("");
+    show_dir(current_dir.path());
     show_volumes();
     show_libs();
 
-    this->setContextMenuPolicy(Qt::CustomContextMenu);
-
-    connect(this, SIGNAL(customContextMenuRequested(const QPoint &)),
-            this, SLOT(ShowContextMenu(const QPoint &)));
 }
 
 MainWindow::~MainWindow()

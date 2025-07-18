@@ -14,9 +14,18 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+private:
+    void show_libs();
+    void show_volumes();
+    void show_dir(QString path);
+    QDir home_dir = QDir::homePath();
+    QDir current_dir;
+    QString copy_file_path;
+    QString copy_file_name;
+    QVector<QString>saved_paths;
+    Ui::MainWindow *ui;
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr,QString dir = "");
     ~MainWindow();
 
 private slots:
@@ -32,8 +41,6 @@ private slots:
 
     void on_pushButton_make_file_clicked();
 
-    void on_pushButton_clicked();
-
     void on_pushButton_addcustom_clicked();
 
     void on_listWidget_custom_itemDoubleClicked(QListWidgetItem *item);
@@ -47,6 +54,8 @@ private slots:
 
     void on_pushButton_pastemove_clicked();
 
+    void on_pushButton_clicked();
+
     void on_pushButton_2_clicked();
 
     void on_lineEdit_search_textChanged(const QString &arg1);
@@ -58,15 +67,6 @@ private slots:
 
     void on_pushButton_custom_delete_clicked();
 
-private:
-    void show_libs();
-    void show_volumes();
-    void show_dir(QString path);
-    QDir home_dir = QDir::homePath();
-    QDir current_dir = home_dir.absolutePath();
-    QString copy_file_path;
-    QString copy_file_name;
-    QVector<QString>saved_paths;
-    Ui::MainWindow *ui;
+
 };
 #endif // MAINWINDOW_H
