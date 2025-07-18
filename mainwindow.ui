@@ -116,6 +116,13 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Rapid Access:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QListWidget" name="listWidget_custom">
         <property name="minimumSize">
          <size>
@@ -132,6 +139,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_libraries">
+        <property name="text">
+         <string>Libraries:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QListWidget" name="listWidget_libs">
         <property name="minimumSize">
          <size>
@@ -144,6 +158,13 @@
           <width>256</width>
           <height>218</height>
          </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Devices:</string>
         </property>
        </widget>
       </item>

@@ -73,10 +73,10 @@ void MainWindow::show_libs(){
     QString pics_path = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     QString musics_path = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);
     ui->listWidget_libs->addItem(home_path);
-    ui->listWidget_libs->addItem(documentos_path);
-    ui->listWidget_libs->addItem(downloads_path);
-    ui->listWidget_libs->addItem(pics_path);
-    ui->listWidget_libs->addItem(musics_path);
+    ui->listWidget_libs->addItem(documentos_path.replace(QDir::homePath(),""));
+    ui->listWidget_libs->addItem(downloads_path.replace(QDir::homePath(),""));
+    ui->listWidget_libs->addItem(pics_path.replace(QDir::homePath(),""));
+    ui->listWidget_libs->addItem(musics_path.replace(QDir::homePath(),""));
 }
 
 void MainWindow::show_volumes(){
@@ -116,7 +116,12 @@ void MainWindow::on_pushButton_go_clicked()
 
 void MainWindow::on_listWidget_libs_itemDoubleClicked(QListWidgetItem *item)
 {
-    show_dir(item->text());
+    if(item->text() != QDir::homePath()){
+        show_dir(QDir::homePath() + item->text());
+    }else{
+        show_dir(QDir::homePath());
+    }
+
 }
 
 

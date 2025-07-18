@@ -13,6 +13,7 @@
 #include <QtGui/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
@@ -34,8 +35,11 @@ public:
     QPushButton *pushButton_custom_delete;
     QPushButton *pushButton_save_custom;
     QPushButton *pushButton_custom_refresh;
+    QLabel *label;
     QListWidget *listWidget_custom;
+    QLabel *label_libraries;
     QListWidget *listWidget_libs;
+    QLabel *label_2;
     QListWidget *listWidget_disks;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -114,6 +118,11 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_5);
 
+        label = new QLabel(centralwidget);
+        label->setObjectName("label");
+
+        verticalLayout->addWidget(label);
+
         listWidget_custom = new QListWidget(centralwidget);
         listWidget_custom->setObjectName("listWidget_custom");
         listWidget_custom->setMinimumSize(QSize(256, 217));
@@ -121,12 +130,22 @@ public:
 
         verticalLayout->addWidget(listWidget_custom);
 
+        label_libraries = new QLabel(centralwidget);
+        label_libraries->setObjectName("label_libraries");
+
+        verticalLayout->addWidget(label_libraries);
+
         listWidget_libs = new QListWidget(centralwidget);
         listWidget_libs->setObjectName("listWidget_libs");
         listWidget_libs->setMinimumSize(QSize(256, 218));
         listWidget_libs->setMaximumSize(QSize(256, 218));
 
         verticalLayout->addWidget(listWidget_libs);
+
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName("label_2");
+
+        verticalLayout->addWidget(label_2);
 
         listWidget_disks = new QListWidget(centralwidget);
         listWidget_disks->setObjectName("listWidget_disks");
@@ -247,6 +266,9 @@ public:
         pushButton_custom_delete->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
         pushButton_save_custom->setText(QCoreApplication::translate("MainWindow", "SAVE", nullptr));
         pushButton_custom_refresh->setText(QCoreApplication::translate("MainWindow", "RE", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Rapid Access:", nullptr));
+        label_libraries->setText(QCoreApplication::translate("MainWindow", "Libraries:", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Devices:", nullptr));
         lineEdit_path->setText(QCoreApplication::translate("MainWindow", "Path", nullptr));
         pushButton_go->setText(QCoreApplication::translate("MainWindow", "GO", nullptr));
         pushButton_make_folder->setText(QCoreApplication::translate("MainWindow", "MAKE FOLDER", nullptr));
