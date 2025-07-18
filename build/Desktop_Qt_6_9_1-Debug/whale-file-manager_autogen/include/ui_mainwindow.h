@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
@@ -30,16 +31,16 @@ public:
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout_6;
     QVBoxLayout *verticalLayout;
+    QLabel *label;
     QHBoxLayout *horizontalLayout_5;
     QPushButton *pushButton_addcustom;
     QPushButton *pushButton_custom_delete;
     QPushButton *pushButton_save_custom;
     QPushButton *pushButton_custom_refresh;
-    QLabel *label;
     QListWidget *listWidget_custom;
     QLabel *label_libraries;
     QListWidget *listWidget_libs;
-    QLabel *label_2;
+    QLabel *label_devices;
     QListWidget *listWidget_disks;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -82,6 +83,11 @@ public:
         horizontalLayout_6->setObjectName("horizontalLayout_6");
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName("verticalLayout");
+        label = new QLabel(centralwidget);
+        label->setObjectName("label");
+
+        verticalLayout->addWidget(label);
+
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(0);
         horizontalLayout_5->setObjectName("horizontalLayout_5");
@@ -104,7 +110,10 @@ public:
         pushButton_save_custom->setObjectName("pushButton_save_custom");
         sizePolicy.setHeightForWidth(pushButton_save_custom->sizePolicy().hasHeightForWidth());
         pushButton_save_custom->setSizePolicy(sizePolicy);
-        pushButton_save_custom->setMaximumSize(QSize(16777215, 41));
+        pushButton_save_custom->setMinimumSize(QSize(50, 0));
+        pushButton_save_custom->setMaximumSize(QSize(50, 41));
+        QIcon icon1(QIcon::fromTheme(QIcon::ThemeIcon::DocumentSave));
+        pushButton_save_custom->setIcon(icon1);
 
         horizontalLayout_5->addWidget(pushButton_save_custom);
 
@@ -112,16 +121,13 @@ public:
         pushButton_custom_refresh->setObjectName("pushButton_custom_refresh");
         pushButton_custom_refresh->setMinimumSize(QSize(50, 41));
         pushButton_custom_refresh->setMaximumSize(QSize(50, 16777215));
+        QIcon icon2(QIcon::fromTheme(QIcon::ThemeIcon::ViewRefresh));
+        pushButton_custom_refresh->setIcon(icon2);
 
         horizontalLayout_5->addWidget(pushButton_custom_refresh);
 
 
         verticalLayout->addLayout(horizontalLayout_5);
-
-        label = new QLabel(centralwidget);
-        label->setObjectName("label");
-
-        verticalLayout->addWidget(label);
 
         listWidget_custom = new QListWidget(centralwidget);
         listWidget_custom->setObjectName("listWidget_custom");
@@ -142,10 +148,10 @@ public:
 
         verticalLayout->addWidget(listWidget_libs);
 
-        label_2 = new QLabel(centralwidget);
-        label_2->setObjectName("label_2");
+        label_devices = new QLabel(centralwidget);
+        label_devices->setObjectName("label_devices");
 
-        verticalLayout->addWidget(label_2);
+        verticalLayout->addWidget(label_devices);
 
         listWidget_disks = new QListWidget(centralwidget);
         listWidget_disks->setObjectName("listWidget_disks");
@@ -216,11 +222,14 @@ public:
         horizontalLayout_4->setObjectName("horizontalLayout_4");
         pushButton_move = new QPushButton(centralwidget);
         pushButton_move->setObjectName("pushButton_move");
+        QIcon icon3(QIcon::fromTheme(QIcon::ThemeIcon::GoNext));
+        pushButton_move->setIcon(icon3);
 
         horizontalLayout_4->addWidget(pushButton_move);
 
         pushButton_pastemove = new QPushButton(centralwidget);
         pushButton_pastemove->setObjectName("pushButton_pastemove");
+        pushButton_pastemove->setEnabled(false);
 
         horizontalLayout_4->addWidget(pushButton_pastemove);
 
@@ -231,6 +240,7 @@ public:
         horizontalLayout_3->setObjectName("horizontalLayout_3");
         pushButton_copy = new QPushButton(centralwidget);
         pushButton_copy->setObjectName("pushButton_copy");
+        pushButton_copy->setIcon(icon);
 
         horizontalLayout_3->addWidget(pushButton_copy);
 
@@ -245,6 +255,8 @@ public:
 
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName("pushButton");
+        QIcon icon4(QIcon::fromTheme(QIcon::ThemeIcon::EditDelete));
+        pushButton->setIcon(icon4);
 
         verticalLayout_2->addWidget(pushButton);
 
@@ -262,13 +274,13 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Whale File Manager", nullptr));
         actionCopy->setText(QCoreApplication::translate("MainWindow", "Copy", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Rapid Access:", nullptr));
         pushButton_addcustom->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         pushButton_custom_delete->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
-        pushButton_save_custom->setText(QCoreApplication::translate("MainWindow", "SAVE", nullptr));
-        pushButton_custom_refresh->setText(QCoreApplication::translate("MainWindow", "RE", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Rapid Access:", nullptr));
+        pushButton_save_custom->setText(QString());
+        pushButton_custom_refresh->setText(QString());
         label_libraries->setText(QCoreApplication::translate("MainWindow", "Libraries:", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "Devices:", nullptr));
+        label_devices->setText(QCoreApplication::translate("MainWindow", "Devices:", nullptr));
         lineEdit_path->setText(QCoreApplication::translate("MainWindow", "Path", nullptr));
         pushButton_go->setText(QCoreApplication::translate("MainWindow", "GO", nullptr));
         pushButton_make_folder->setText(QCoreApplication::translate("MainWindow", "MAKE FOLDER", nullptr));

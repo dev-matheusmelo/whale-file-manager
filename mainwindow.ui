@@ -30,6 +30,13 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Rapid Access:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <property name="spacing">
          <number>0</number>
@@ -83,14 +90,23 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>16777215</width>
+            <width>50</width>
             <height>41</height>
            </size>
           </property>
           <property name="text">
-           <string>SAVE</string>
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
           </property>
          </widget>
         </item>
@@ -109,18 +125,14 @@
            </size>
           </property>
           <property name="text">
-           <string>RE</string>
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::ViewRefresh"/>
           </property>
          </widget>
         </item>
        </layout>
-      </item>
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Rapid Access:</string>
-        </property>
-       </widget>
       </item>
       <item>
        <widget class="QListWidget" name="listWidget_custom">
@@ -162,7 +174,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="label_devices">
         <property name="text">
          <string>Devices:</string>
         </property>
@@ -279,10 +291,16 @@
           <property name="text">
            <string>Move</string>
           </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::GoNext"/>
+          </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_pastemove">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Paste move</string>
           </property>
@@ -296,6 +314,9 @@
          <widget class="QPushButton" name="pushButton_copy">
           <property name="text">
            <string>Copy</string>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::EditCopy"/>
           </property>
          </widget>
         </item>
@@ -315,6 +336,9 @@
        <widget class="QPushButton" name="pushButton">
         <property name="text">
          <string>DELETE</string>
+        </property>
+        <property name="icon">
+         <iconset theme="QIcon::ThemeIcon::EditDelete"/>
         </property>
        </widget>
       </item>

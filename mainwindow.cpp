@@ -160,20 +160,22 @@ void MainWindow::on_pushButton_make_file_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QString current_file = ui->listWidget_files->currentItem()->text();
-    QString full_path = current_dir.path() + "/" + current_file;
-    bool excluir = QMessageBox::question(this,"Deseja excluir","Deseja realmente excluir:" + current_file);
-    if(excluir){
-        QFileInfo info(full_path);
-        if(info.isDir()){
-            current_dir.setPath(full_path);
-            current_dir.removeRecursively();
-            current_dir.cdUp();
-        }else{
-            current_dir.remove(current_file);
+    if(ui->listWidget_files->currentRow() >= 0){
+        QString current_file = ui->listWidget_files->currentItem()->text();
+        QString full_path = current_dir.path() + "/" + current_file;
+        QMessageBox::StandardButton excluir = QMessageBox::question(this,"Deseja excluir","Deseja realmente excluir:" + current_file);
+        if(excluir == QMessageBox::Yes){
+            QFileInfo info(full_path);
+            if(info.isDir()){
+                current_dir.setPath(full_path);
+                current_dir.removeRecursively();
+                current_dir.cdUp();
+            }else{
+                current_dir.remove(current_file);
+            }
         }
+        show_dir(current_dir.path());
     }
-    show_dir(current_dir.path());
 }
 
 
@@ -275,7 +277,6 @@ void MainWindow::on_pushButton_move_clicked()
 {
     QString current_file = ui->listWidget_files->currentItem()->text();
     QString full_path = current_dir.path() + "/" + current_file;
-    QFileInfo info(full_path);
 
     QMessageBox::about(this,"",full_path);
     copy_file_path = full_path;
