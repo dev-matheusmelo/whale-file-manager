@@ -39,3 +39,17 @@
 21	4336	1752864088198578660	CMakeFiles/whale-file-manager.dir/main.cpp.o	6f0fdb9fcc3662ec
 22	5220	1752864088198578660	CMakeFiles/whale-file-manager.dir/mainwindow.cpp.o	8de05b5f005304e6
 5220	5649	1752864093394578760	whale-file-manager	4fcd8c230f38f466
+4	583	1752864368138584030	whale-file-manager_autogen/timestamp	a2fece79faa7d410
+4	583	1752864368138584030	whale-file-manager_autogen/mocs_compilation.cpp	a2fece79faa7d410
+4	583	1752864368138584030	/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/build/Desktop_Qt_6_9_1-Debug/whale-file-manager_autogen/timestamp	a2fece79faa7d410
+4	583	1752864368138584030	/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/build/Desktop_Qt_6_9_1-Debug/whale-file-manager_autogen/mocs_compilation.cpp	a2fece79faa7d410
+583	4666	1752864368146584030	CMakeFiles/whale-file-manager.dir/main.cpp.o	6f0fdb9fcc3662ec
+583	4678	1752864368146584030	CMakeFiles/whale-file-manager.dir/whale-file-manager_autogen/mocs_compilation.cpp.o	7b8c5e5b0bcd568a
+583	5554	1752864368146584030	CMakeFiles/whale-file-manager.dir/mainwindow.cpp.o	8de05b5f005304e6
+5554	5991	1752864373118584125	whale-file-manager	4fcd8c230f38f466
+5	22	1752864778034591893	whale-file-manager_autogen/timestamp	a2fece79faa7d410
+5	22	1752864778034591893	whale-file-manager_autogen/mocs_compilation.cpp	a2fece79faa7d410
+5	22	1752864778034591893	/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/build/Desktop_Qt_6_9_1-Debug/whale-file-manager_autogen/timestamp	a2fece79faa7d410
+5	22	1752864778034591893	/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/build/Desktop_Qt_6_9_1-Debug/whale-file-manager_autogen/mocs_compilation.cpp	a2fece79faa7d410
+22	5329	1752864778050591893	CMakeFiles/whale-file-manager.dir/mainwindow.cpp.o	8de05b5f005304e6
+5329	5815	1752864783358591995	whale-file-manager	4fcd8c230f38f466

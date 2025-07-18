@@ -19,12 +19,13 @@ MainWindow::MainWindow(QWidget *parent,QString dir)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    MainWindow::on_pushButton_custom_refresh_clicked();
     current_dir.setPath(dir);
     ui->lineEdit_path->setText(current_dir.path());
     show_dir(current_dir.path());
     show_volumes();
     show_libs();
-
 }
 
 MainWindow::~MainWindow()
