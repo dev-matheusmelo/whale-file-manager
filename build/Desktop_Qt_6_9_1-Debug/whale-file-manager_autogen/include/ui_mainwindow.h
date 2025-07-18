@@ -27,9 +27,13 @@ class Ui_MainWindow
 public:
     QAction *actionCopy;
     QWidget *centralwidget;
-    QHBoxLayout *horizontalLayout_5;
+    QHBoxLayout *horizontalLayout_6;
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_5;
     QPushButton *pushButton_addcustom;
+    QPushButton *pushButton_custom_delete;
+    QPushButton *pushButton_save_custom;
+    QPushButton *pushButton_custom_refresh;
     QListWidget *listWidget_custom;
     QListWidget *listWidget_libs;
     QListWidget *listWidget_disks;
@@ -55,7 +59,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(709, 731);
+        MainWindow->resize(709, 733);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -70,17 +74,45 @@ public:
         actionCopy->setMenuRole(QAction::MenuRole::NoRole);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        horizontalLayout_5 = new QHBoxLayout(centralwidget);
-        horizontalLayout_5->setObjectName("horizontalLayout_5");
+        horizontalLayout_6 = new QHBoxLayout(centralwidget);
+        horizontalLayout_6->setObjectName("horizontalLayout_6");
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName("verticalLayout");
-        verticalLayout->setSizeConstraint(QLayout::SizeConstraint::SetFixedSize);
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(0);
+        horizontalLayout_5->setObjectName("horizontalLayout_5");
+        horizontalLayout_5->setSizeConstraint(QLayout::SizeConstraint::SetDefaultConstraint);
         pushButton_addcustom = new QPushButton(centralwidget);
         pushButton_addcustom->setObjectName("pushButton_addcustom");
-        pushButton_addcustom->setMinimumSize(QSize(256, 41));
-        pushButton_addcustom->setMaximumSize(QSize(256, 41));
+        pushButton_addcustom->setMinimumSize(QSize(50, 41));
+        pushButton_addcustom->setMaximumSize(QSize(50, 41));
 
-        verticalLayout->addWidget(pushButton_addcustom);
+        horizontalLayout_5->addWidget(pushButton_addcustom);
+
+        pushButton_custom_delete = new QPushButton(centralwidget);
+        pushButton_custom_delete->setObjectName("pushButton_custom_delete");
+        pushButton_custom_delete->setMinimumSize(QSize(50, 41));
+        pushButton_custom_delete->setMaximumSize(QSize(50, 41));
+
+        horizontalLayout_5->addWidget(pushButton_custom_delete);
+
+        pushButton_save_custom = new QPushButton(centralwidget);
+        pushButton_save_custom->setObjectName("pushButton_save_custom");
+        sizePolicy.setHeightForWidth(pushButton_save_custom->sizePolicy().hasHeightForWidth());
+        pushButton_save_custom->setSizePolicy(sizePolicy);
+        pushButton_save_custom->setMaximumSize(QSize(16777215, 41));
+
+        horizontalLayout_5->addWidget(pushButton_save_custom);
+
+        pushButton_custom_refresh = new QPushButton(centralwidget);
+        pushButton_custom_refresh->setObjectName("pushButton_custom_refresh");
+        pushButton_custom_refresh->setMinimumSize(QSize(50, 41));
+        pushButton_custom_refresh->setMaximumSize(QSize(50, 16777215));
+
+        horizontalLayout_5->addWidget(pushButton_custom_refresh);
+
+
+        verticalLayout->addLayout(horizontalLayout_5);
 
         listWidget_custom = new QListWidget(centralwidget);
         listWidget_custom->setObjectName("listWidget_custom");
@@ -104,7 +136,7 @@ public:
         verticalLayout->addWidget(listWidget_disks);
 
 
-        horizontalLayout_5->addLayout(verticalLayout);
+        horizontalLayout_6->addLayout(verticalLayout);
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName("verticalLayout_2");
@@ -198,7 +230,7 @@ public:
         verticalLayout_2->addWidget(pushButton);
 
 
-        horizontalLayout_5->addLayout(verticalLayout_2);
+        horizontalLayout_6->addLayout(verticalLayout_2);
 
         MainWindow->setCentralWidget(centralwidget);
 
@@ -211,7 +243,10 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Whale File Manager", nullptr));
         actionCopy->setText(QCoreApplication::translate("MainWindow", "Copy", nullptr));
-        pushButton_addcustom->setText(QCoreApplication::translate("MainWindow", "ADD CUSTOM DIR", nullptr));
+        pushButton_addcustom->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
+        pushButton_custom_delete->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+        pushButton_save_custom->setText(QCoreApplication::translate("MainWindow", "SAVE", nullptr));
+        pushButton_custom_refresh->setText(QCoreApplication::translate("MainWindow", "RE", nullptr));
         lineEdit_path->setText(QCoreApplication::translate("MainWindow", "Path", nullptr));
         pushButton_go->setText(QCoreApplication::translate("MainWindow", "GO", nullptr));
         pushButton_make_folder->setText(QCoreApplication::translate("MainWindow", "MAKE FOLDER", nullptr));

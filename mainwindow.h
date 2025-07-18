@@ -52,6 +52,12 @@ private slots:
     void on_lineEdit_search_textChanged(const QString &arg1);
 
 
+    void on_pushButton_save_custom_clicked();
+
+    void on_pushButton_custom_refresh_clicked();
+
+    void on_pushButton_custom_delete_clicked();
+
 private:
     void show_libs();
     void show_volumes();
@@ -60,6 +66,7 @@ private:
     QDir current_dir = home_dir.absolutePath();
     QString copy_file_path;
     QString copy_file_name;
+    QVector<QString>saved_paths;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

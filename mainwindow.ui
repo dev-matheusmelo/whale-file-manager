@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>709</width>
-    <height>731</height>
+    <height>733</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,30 +26,94 @@
    <string notr="true">font: 14pt &quot;Sans Serif&quot;;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_5">
+   <layout class="QHBoxLayout" name="horizontalLayout_6">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="sizeConstraint">
-       <enum>QLayout::SizeConstraint::SetFixedSize</enum>
-      </property>
       <item>
-       <widget class="QPushButton" name="pushButton_addcustom">
-        <property name="minimumSize">
-         <size>
-          <width>256</width>
-          <height>41</height>
-         </size>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <property name="spacing">
+         <number>0</number>
         </property>
-        <property name="maximumSize">
-         <size>
-          <width>256</width>
-          <height>41</height>
-         </size>
+        <property name="sizeConstraint">
+         <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
         </property>
-        <property name="text">
-         <string>ADD CUSTOM DIR</string>
-        </property>
-       </widget>
+        <item>
+         <widget class="QPushButton" name="pushButton_addcustom">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>41</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>41</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>+</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_custom_delete">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>41</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>41</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>-</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_save_custom">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>41</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>SAVE</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_custom_refresh">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>41</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>RE</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QListWidget" name="listWidget_custom">

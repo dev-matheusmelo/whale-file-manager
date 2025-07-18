@@ -181,10 +181,46 @@ void MainWindow::on_pushButton_addcustom_clicked()
     QString path = QInputDialog::getText(this,"Add a custom path","path:");
     QFileInfo info(path);
     if(info.isDir()){
+        saved_paths.push_back(path);
         ui->listWidget_custom->addItem(path);
     }else if(!info.isDir() or path == ""){
         QMessageBox::about(this,"Error","Not a dir:"+path);
     }
+}
+
+void MainWindow::on_pushButton_save_custom_clicked()
+{
+    QString home_path = QDir::homePath();
+    QString save_name = home_path + "/whale_save.data";
+    QMessageBox::about(this,"",save_name);
+    QFile custom_save_file(save_name);
+    custom_save_file.open(QIODeviceBase::ReadWrite | QIODeviceBase::Append);
+    if(custom_save_file.isOpen()){
+        foreach(auto copy,saved_paths){
+            custom_save_file.write(copy.toUtf8() + "\n");
+        }
+    }
+    custom_save_file.close();
+}
+
+void MainWindow::on_pushButton_custom_refresh_clicked()
+{
+    QString home_path = QDir::homePath();
+    QString saved_path = home_path + "/whale_save.data";
+    QFile saved_file(saved_path);
+    QVector<QString>data;
+    saved_file.open(QIODeviceBase::ReadOnly);
+    if(saved_file.isOpen()){
+        while(!saved_file.atEnd()){
+            data.push_back(saved_file.readLine().replace("\n",""));
+        }
+        saved_file.close();
+    }
+    ui->listWidget_custom->clear();
+    foreach(auto copy,data){
+        ui->listWidget_custom->addItem(copy);
+    }
+
 }
 
 
@@ -280,13 +316,21 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
 {
-
     QString search_text = arg1;
     ui->listWidget_files->clear();
     foreach(auto copy,current_dir.entryList()){
         if(copy.contains(search_text)){
             ui->listWidget_files->addItem(copy);
         }
+    }
+}
+
+void MainWindow::on_pushButton_custom_delete_clicked()
+{
+    QListWidgetItem *item = ui->listWidget_custom->currentItem();
+    if(item){
+        QListWidgetItem *deleted_item = ui->listWidget_custom->takeItem(ui->listWidget_custom->row(item));
+        delete deleted_item;
     }
 }
 
