@@ -49,10 +49,11 @@ void MainWindow::show_dir(QString path){
     current_dir.cd(path);
     ui->lineEdit_path->setText(current_dir.path());
     ui->listWidget_files->clear();
-    foreach(auto copy, current_dir.entryList()){
-        if(copy != "."){
-            QFileInfo info(current_dir.path()+ "/" + copy);
-            QListWidgetItem *item = new QListWidgetItem(copy);
+    QFileInfoList file_list = current_dir.entryInfoList(QDir::NoFilter,QDir::SortFlag::DirsFirst).toList();
+    foreach(auto copy, file_list){
+        if(copy.fileName() != "."){
+            QFileInfo info(current_dir.path()+ "/" + copy.fileName());
+            QListWidgetItem *item = new QListWidgetItem(copy.fileName());
             if(info.isDir()){
                 item->setIcon(QIcon(":/assets/imagens/folder2.png"));
                 //ui->listWidget_files->addItem()
@@ -62,7 +63,6 @@ void MainWindow::show_dir(QString path){
             ui->listWidget_files->addItem(item);
         }
     }
-
 
 }
 
@@ -316,7 +316,15 @@ void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
     ui->listWidget_files->clear();
     foreach(auto copy,current_dir.entryList()){
         if(copy.contains(search_text)){
-            ui->listWidget_files->addItem(copy);
+            QFileInfo info(current_dir.path()+ "/" + copy);
+            QListWidgetItem *item = new QListWidgetItem(copy);
+            if(info.isDir()){
+                item->setIcon(QIcon(":/assets/imagens/folder2.png"));
+                //ui->listWidget_files->addItem()
+            }else if(info.isFile()){
+                item->setIcon(QIcon(":/assets/imagens/file2.ico"));
+            }
+            ui->listWidget_files->addItem(item);
         }
     }
 }
@@ -329,4 +337,6 @@ void MainWindow::on_pushButton_custom_delete_clicked()
         delete deleted_item;
     }
 }
+
+
 
