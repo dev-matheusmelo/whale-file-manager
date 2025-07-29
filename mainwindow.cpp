@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent,QString dir)
     show_dir(current_dir.path());
     show_volumes();
     show_libs();
+    ui->tabWidget->addTab(ui->listWidget_files,"Tab");
+    //connect(ui->actionCopy,ui->actionCopy->hovered(),ui->pushButton_copy,ui->pushButton_copy->click());
 }
 
 MainWindow::~MainWindow()
@@ -81,9 +83,8 @@ void MainWindow::show_libs(){
 
 void MainWindow::show_volumes(){
     foreach(auto copy, QStorageInfo::mountedVolumes()){
-        QString device = copy.device();
-        if(device.startsWith("/dev/sd")){
-            ui->listWidget_disks->addItem(copy.device());
+        if(copy.device().contains("dev/sd")){
+            ui->listWidget_disks->addItem(copy.rootPath());
         }
     }
 }
@@ -158,7 +159,7 @@ void MainWindow::on_pushButton_make_file_clicked()
 }
 
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_delete_clicked()
 {
     if(ui->listWidget_files->currentRow() >= 0){
         QString current_file = ui->listWidget_files->currentItem()->text();
@@ -299,7 +300,7 @@ void MainWindow::on_pushButton_pastemove_clicked()
 }
 
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_pushButton_rename_clicked()
 {
     QString rename = QInputDialog::getText(this,"Rename to","new name:");
     if(rename != ""){
@@ -345,4 +346,10 @@ void MainWindow::on_pushButton_custom_delete_clicked()
 }
 
 
+
+
+void MainWindow::on_listWidget_disks_itemDoubleClicked(QListWidgetItem *item)
+{
+    show_dir(item->text());
+}
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>709</width>
-    <height>733</height>
+    <height>829</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -106,7 +106,7 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
+           <iconset theme="document-save"/>
           </property>
          </widget>
         </item>
@@ -176,7 +176,7 @@
       <item>
        <widget class="QLabel" name="label_devices">
         <property name="text">
-         <string>Devices:</string>
+         <string>Mounted Devices:</string>
         </property>
        </widget>
       </item>
@@ -259,6 +259,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>-1</number>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QListWidget" name="listWidget_files">
         <property name="mouseTracking">
          <bool>false</bool>
@@ -278,7 +285,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="pushButton_rename">
         <property name="text">
          <string>RENAME</string>
         </property>
@@ -333,7 +340,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pushButton_delete">
         <property name="text">
          <string>DELETE</string>
         </property>
@@ -346,17 +353,6 @@
     </item>
    </layout>
   </widget>
-  <action name="actionCopy">
-   <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::EditCopy"/>
-   </property>
-   <property name="text">
-    <string>Copy</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::MenuRole::NoRole</enum>
-   </property>
-  </action>
  </widget>
  <resources/>
  <connections/>

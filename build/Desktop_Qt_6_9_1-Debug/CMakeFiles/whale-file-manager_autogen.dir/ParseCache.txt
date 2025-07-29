@@ -482,6 +482,6 @@
  mdp:/usr/lib/gcc/x86_64-linux-gnu/12/include/stdbool.h
  mdp:/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h
  mdp:/usr/lib/linux/uapi/x86/asm/errno.h
-/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/main.cpp
 /home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/mainwindow.cpp
  uic:./ui_mainwindow.h
+/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/main.cpp

@@ -10,7 +10,6 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
@@ -19,6 +18,7 @@
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -27,7 +27,6 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
-    QAction *actionCopy;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout_6;
     QVBoxLayout *verticalLayout;
@@ -50,21 +49,22 @@ public:
     QPushButton *pushButton_make_folder;
     QPushButton *pushButton_make_file;
     QLineEdit *lineEdit_search;
+    QTabWidget *tabWidget;
     QListWidget *listWidget_files;
-    QPushButton *pushButton_2;
+    QPushButton *pushButton_rename;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *pushButton_move;
     QPushButton *pushButton_pastemove;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton_copy;
     QPushButton *pushButton_paste;
-    QPushButton *pushButton;
+    QPushButton *pushButton_delete;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(709, 733);
+        MainWindow->resize(709, 829);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -72,11 +72,6 @@ public:
         MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setAutoFillBackground(false);
         MainWindow->setStyleSheet(QString::fromUtf8("font: 14pt \"Sans Serif\";"));
-        actionCopy = new QAction(MainWindow);
-        actionCopy->setObjectName("actionCopy");
-        QIcon icon(QIcon::fromTheme(QIcon::ThemeIcon::EditCopy));
-        actionCopy->setIcon(icon);
-        actionCopy->setMenuRole(QAction::MenuRole::NoRole);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         horizontalLayout_6 = new QHBoxLayout(centralwidget);
@@ -112,8 +107,8 @@ public:
         pushButton_save_custom->setSizePolicy(sizePolicy);
         pushButton_save_custom->setMinimumSize(QSize(50, 0));
         pushButton_save_custom->setMaximumSize(QSize(50, 41));
-        QIcon icon1(QIcon::fromTheme(QIcon::ThemeIcon::DocumentSave));
-        pushButton_save_custom->setIcon(icon1);
+        QIcon icon(QIcon::fromTheme(QString::fromUtf8("document-save")));
+        pushButton_save_custom->setIcon(icon);
 
         horizontalLayout_5->addWidget(pushButton_save_custom);
 
@@ -121,8 +116,8 @@ public:
         pushButton_custom_refresh->setObjectName("pushButton_custom_refresh");
         pushButton_custom_refresh->setMinimumSize(QSize(50, 41));
         pushButton_custom_refresh->setMaximumSize(QSize(50, 16777215));
-        QIcon icon2(QIcon::fromTheme(QIcon::ThemeIcon::ViewRefresh));
-        pushButton_custom_refresh->setIcon(icon2);
+        QIcon icon1(QIcon::fromTheme(QIcon::ThemeIcon::ViewRefresh));
+        pushButton_custom_refresh->setIcon(icon1);
 
         horizontalLayout_5->addWidget(pushButton_custom_refresh);
 
@@ -203,6 +198,11 @@ public:
 
         verticalLayout_2->addWidget(lineEdit_search);
 
+        tabWidget = new QTabWidget(centralwidget);
+        tabWidget->setObjectName("tabWidget");
+
+        verticalLayout_2->addWidget(tabWidget);
+
         listWidget_files = new QListWidget(centralwidget);
         listWidget_files->setObjectName("listWidget_files");
         listWidget_files->setMouseTracking(false);
@@ -213,17 +213,17 @@ public:
 
         verticalLayout_2->addWidget(listWidget_files);
 
-        pushButton_2 = new QPushButton(centralwidget);
-        pushButton_2->setObjectName("pushButton_2");
+        pushButton_rename = new QPushButton(centralwidget);
+        pushButton_rename->setObjectName("pushButton_rename");
 
-        verticalLayout_2->addWidget(pushButton_2);
+        verticalLayout_2->addWidget(pushButton_rename);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName("horizontalLayout_4");
         pushButton_move = new QPushButton(centralwidget);
         pushButton_move->setObjectName("pushButton_move");
-        QIcon icon3(QIcon::fromTheme(QIcon::ThemeIcon::GoNext));
-        pushButton_move->setIcon(icon3);
+        QIcon icon2(QIcon::fromTheme(QIcon::ThemeIcon::GoNext));
+        pushButton_move->setIcon(icon2);
 
         horizontalLayout_4->addWidget(pushButton_move);
 
@@ -240,7 +240,8 @@ public:
         horizontalLayout_3->setObjectName("horizontalLayout_3");
         pushButton_copy = new QPushButton(centralwidget);
         pushButton_copy->setObjectName("pushButton_copy");
-        pushButton_copy->setIcon(icon);
+        QIcon icon3(QIcon::fromTheme(QIcon::ThemeIcon::EditCopy));
+        pushButton_copy->setIcon(icon3);
 
         horizontalLayout_3->addWidget(pushButton_copy);
 
@@ -253,12 +254,12 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout_3);
 
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName("pushButton");
+        pushButton_delete = new QPushButton(centralwidget);
+        pushButton_delete->setObjectName("pushButton_delete");
         QIcon icon4(QIcon::fromTheme(QIcon::ThemeIcon::EditDelete));
-        pushButton->setIcon(icon4);
+        pushButton_delete->setIcon(icon4);
 
-        verticalLayout_2->addWidget(pushButton);
+        verticalLayout_2->addWidget(pushButton_delete);
 
 
         horizontalLayout_6->addLayout(verticalLayout_2);
@@ -267,20 +268,22 @@ public:
 
         retranslateUi(MainWindow);
 
+        tabWidget->setCurrentIndex(-1);
+
+
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Whale File Manager", nullptr));
-        actionCopy->setText(QCoreApplication::translate("MainWindow", "Copy", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Rapid Access:", nullptr));
         pushButton_addcustom->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         pushButton_custom_delete->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
         pushButton_save_custom->setText(QString());
         pushButton_custom_refresh->setText(QString());
         label_libraries->setText(QCoreApplication::translate("MainWindow", "Libraries:", nullptr));
-        label_devices->setText(QCoreApplication::translate("MainWindow", "Devices:", nullptr));
+        label_devices->setText(QCoreApplication::translate("MainWindow", "Mounted Devices:", nullptr));
         lineEdit_path->setText(QCoreApplication::translate("MainWindow", "Path", nullptr));
         pushButton_go->setText(QCoreApplication::translate("MainWindow", "GO", nullptr));
         pushButton_make_folder->setText(QCoreApplication::translate("MainWindow", "MAKE FOLDER", nullptr));
@@ -288,12 +291,12 @@ public:
         lineEdit_search->setInputMask(QString());
         lineEdit_search->setText(QString());
         lineEdit_search->setPlaceholderText(QCoreApplication::translate("MainWindow", "Search", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "RENAME", nullptr));
+        pushButton_rename->setText(QCoreApplication::translate("MainWindow", "RENAME", nullptr));
         pushButton_move->setText(QCoreApplication::translate("MainWindow", "Move", nullptr));
         pushButton_pastemove->setText(QCoreApplication::translate("MainWindow", "Paste move", nullptr));
         pushButton_copy->setText(QCoreApplication::translate("MainWindow", "Copy", nullptr));
         pushButton_paste->setText(QCoreApplication::translate("MainWindow", "Paste", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "DELETE", nullptr));
+        pushButton_delete->setText(QCoreApplication::translate("MainWindow", "DELETE", nullptr));
     } // retranslateUi
 
 };

@@ -54,9 +54,9 @@ private slots:
 
     void on_pushButton_pastemove_clicked();
 
-    void on_pushButton_clicked();
+    void on_pushButton_delete_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_pushButton_rename_clicked();
 
     void on_lineEdit_search_textChanged(const QString &arg1);
 
@@ -68,5 +68,6 @@ private slots:
     void on_pushButton_custom_delete_clicked();
 
 
+    void on_listWidget_disks_itemDoubleClicked(QListWidgetItem *item);
 };
 #endif // MAINWINDOW_H
