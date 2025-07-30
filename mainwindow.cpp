@@ -27,7 +27,6 @@ MainWindow::MainWindow(QWidget *parent,QString dir)
     show_volumes();
     show_libs();
     ui->tabWidget->addTab(ui->listWidget_files,"Tab");
-    //connect(ui->actionCopy,ui->actionCopy->hovered(),ui->pushButton_copy,ui->pushButton_copy->click());
 }
 
 MainWindow::~MainWindow()
@@ -51,16 +50,16 @@ void MainWindow::show_dir(QString path){
     current_dir.cd(path);
     ui->lineEdit_path->setText(current_dir.path());
     ui->listWidget_files->clear();
+    ui->listWidget_files->setIconSize(QSize(32,32));
     QFileInfoList file_list = current_dir.entryInfoList(QDir::NoFilter,QDir::SortFlag::DirsFirst).toList();
     foreach(auto copy, file_list){
         if(copy.fileName() != "."){
             QFileInfo info(current_dir.path()+ "/" + copy.fileName());
             QListWidgetItem *item = new QListWidgetItem(copy.fileName());
             if(info.isDir()){
-                item->setIcon(QIcon(":/assets/imagens/folder2.png"));
-                //ui->listWidget_files->addItem()
+                item->setIcon(QIcon::fromTheme("folder"));
             }else if(info.isFile()){
-                item->setIcon(QIcon(":/assets/imagens/file2.ico"));
+                item->setIcon(QIcon::fromTheme("text-x-generic"));
             }
             ui->listWidget_files->addItem(item);
         }
@@ -74,17 +73,25 @@ void MainWindow::show_libs(){
     QString downloads_path = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
     QString pics_path = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
     QString musics_path = QStandardPaths::writableLocation(QStandardPaths::MusicLocation);
-    ui->listWidget_libs->addItem(home_path);
-    ui->listWidget_libs->addItem(documentos_path.replace(QDir::homePath(),""));
-    ui->listWidget_libs->addItem(downloads_path.replace(QDir::homePath(),""));
-    ui->listWidget_libs->addItem(pics_path.replace(QDir::homePath(),""));
-    ui->listWidget_libs->addItem(musics_path.replace(QDir::homePath(),""));
+    QListWidgetItem *item1 = new QListWidgetItem(QIcon::fromTheme("folder"),home_path);
+    QListWidgetItem *item2 = new QListWidgetItem(QIcon::fromTheme("folder"),documentos_path.replace(QDir::homePath(),""));
+    QListWidgetItem *item3 = new QListWidgetItem(QIcon::fromTheme("folder"),downloads_path.replace(QDir::homePath(),""));
+    QListWidgetItem *item4 = new QListWidgetItem(QIcon::fromTheme("folder"),pics_path.replace(QDir::homePath(),""));
+    QListWidgetItem *item5 = new QListWidgetItem(QIcon::fromTheme("folder"),musics_path.replace(QDir::homePath(),""));
+    ui->listWidget_libs->setIconSize(QSize(32,32));
+    ui->listWidget_libs->addItem(item1);
+    ui->listWidget_libs->addItem(item2);
+    ui->listWidget_libs->addItem(item3);
+    ui->listWidget_libs->addItem(item4);
+    ui->listWidget_libs->addItem(item5);
 }
 
 void MainWindow::show_volumes(){
+    ui->listWidget_disks->setIconSize(QSize(32,32));
     foreach(auto copy, QStorageInfo::mountedVolumes()){
         if(copy.device().contains("dev/sd")){
-            ui->listWidget_disks->addItem(copy.rootPath());
+            QListWidgetItem *item = new QListWidgetItem(QIcon::fromTheme("drive-harddisk"),copy.rootPath());
+            ui->listWidget_disks->addItem(item);
         }
     }
 }

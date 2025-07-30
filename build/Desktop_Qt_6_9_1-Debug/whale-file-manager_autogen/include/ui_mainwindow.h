@@ -107,7 +107,7 @@ public:
         pushButton_save_custom->setSizePolicy(sizePolicy);
         pushButton_save_custom->setMinimumSize(QSize(50, 0));
         pushButton_save_custom->setMaximumSize(QSize(50, 41));
-        QIcon icon(QIcon::fromTheme(QString::fromUtf8("document-save")));
+        QIcon icon(QIcon::fromTheme(QString::fromUtf8("folder")));
         pushButton_save_custom->setIcon(icon);
 
         horizontalLayout_5->addWidget(pushButton_save_custom);

@@ -106,7 +106,7 @@
            <string/>
           </property>
           <property name="icon">
-           <iconset theme="document-save"/>
+           <iconset theme="folder"/>
           </property>
          </widget>
         </item>
