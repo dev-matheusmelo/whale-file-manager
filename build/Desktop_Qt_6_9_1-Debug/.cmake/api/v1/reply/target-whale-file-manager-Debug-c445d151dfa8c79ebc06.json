@@ -298,8 +298,7 @@
 			[
 				0,
 				1,
-				2,
-				8
+				2
 			]
 		}
 	],
@@ -391,8 +390,7 @@
 			[
 				0,
 				1,
-				2,
-				8
+				2
 			]
 		},
 		{
@@ -400,7 +398,7 @@
 			"sourceIndexes" : 
 			[
 				3,
-				6
+				5
 			]
 		},
 		{
@@ -411,25 +409,17 @@
 			]
 		},
 		{
-			"name" : "Resources",
-			"sourceIndexes" : 
-			[
-				5
-			]
-		},
-		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				7
+				6
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				9,
-				10
+				7
 			]
 		}
 	],
@@ -465,11 +455,6 @@
 			"sourceGroupIndex" : 2
 		},
 		{
-			"backtrace" : 4,
-			"path" : "assets.qrc",
-			"sourceGroupIndex" : 3
-		},
-		{
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_1-Debug/whale-file-manager_autogen/include/ui_mainwindow.h",
@@ -479,26 +464,13 @@
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_1-Debug/whale-file-manager_autogen/timestamp",
-			"sourceGroupIndex" : 4
-		},
-		{
-			"backtrace" : 0,
-			"compileGroupIndex" : 0,
-			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_1-Debug/whale-file-manager_autogen/EWIEGA46WW/qrc_assets.cpp",
-			"sourceGroupIndex" : 0
+			"sourceGroupIndex" : 3
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_1-Debug/whale-file-manager_autogen/timestamp.rule",
-			"sourceGroupIndex" : 5
-		},
-		{
-			"backtrace" : 0,
-			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_1-Debug/whale-file-manager_autogen/EWIEGA46WW/qrc_assets.cpp.rule",
-			"sourceGroupIndex" : 5
+			"sourceGroupIndex" : 4
 		}
 	],
 	"type" : "EXECUTABLE"

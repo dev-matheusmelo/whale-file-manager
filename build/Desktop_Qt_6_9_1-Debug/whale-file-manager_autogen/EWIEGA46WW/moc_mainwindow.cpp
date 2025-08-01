@@ -63,7 +63,10 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "on_pushButton_save_custom_clicked",
         "on_pushButton_custom_refresh_clicked",
         "on_pushButton_custom_delete_clicked",
-        "on_listWidget_disks_itemDoubleClicked"
+        "on_listWidget_disks_itemDoubleClicked",
+        "on_tabWidget_tabBarDoubleClicked",
+        "index",
+        "on_tabWidget_currentChanged"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -119,6 +122,14 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void(QListWidgetItem *)>(25, 2, QMC::AccessPrivate, QMetaType::Void, {{
             { 0x80000000 | 3, 4 },
         }}),
+        // Slot 'on_tabWidget_tabBarDoubleClicked'
+        QtMocHelpers::SlotData<void(int)>(26, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 27 },
+        }}),
+        // Slot 'on_tabWidget_currentChanged'
+        QtMocHelpers::SlotData<void(int)>(28, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 27 },
+        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -162,6 +173,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 17: _t->on_pushButton_custom_refresh_clicked(); break;
         case 18: _t->on_pushButton_custom_delete_clicked(); break;
         case 19: _t->on_listWidget_disks_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 20: _t->on_tabWidget_tabBarDoubleClicked((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 21: _t->on_tabWidget_currentChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
         }
     }
@@ -186,14 +199,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 20)
+        if (_id < 22)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 20;
+        _id -= 22;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 20)
+        if (_id < 22)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 20;
+        _id -= 22;
     }
     return _id;
 }

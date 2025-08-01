@@ -17,18 +17,22 @@ class MainWindow : public QMainWindow
 private:
     void show_libs();
     void show_volumes();
-    void show_dir(QString path);
+    void show_dir(QString path,int tab_index = 0);
     QDir home_dir = QDir::homePath();
     QDir current_dir;
     QString copy_file_path;
     QString copy_file_name;
     QVector<QString>saved_paths;
     Ui::MainWindow *ui;
+    void make_listwidget();
+    QVector<QListWidget*>list_widget_vec;
+    QVector<QString>vec_tab_path;
 public:
     MainWindow(QWidget *parent = nullptr,QString dir = "");
     ~MainWindow();
 
 private slots:
+
     void on_listWidget_files_itemDoubleClicked(QListWidgetItem *item);
 
     void on_lineEdit_path_returnPressed();
@@ -69,5 +73,7 @@ private slots:
 
 
     void on_listWidget_disks_itemDoubleClicked(QListWidgetItem *item);
+    void on_tabWidget_tabBarDoubleClicked(int index);
+    void on_tabWidget_currentChanged(int index);
 };
 #endif // MAINWINDOW_H

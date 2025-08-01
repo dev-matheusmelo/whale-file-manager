@@ -23,15 +23,23 @@ MainWindow::MainWindow(QWidget *parent,QString dir)
     MainWindow::on_pushButton_custom_refresh_clicked();
     current_dir.setPath(dir);
     ui->lineEdit_path->setText(current_dir.path());
-    show_dir(current_dir.path());
     show_volumes();
     show_libs();
-    ui->tabWidget->addTab(ui->listWidget_files,"Tab");
+    make_listwidget();
+    ui->tabWidget->addTab(list_widget_vec[0],"Tab");
+    show_dir(current_dir.path());
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::make_listwidget(){
+    QListWidget *listwidget = new QListWidget(centralWidget());
+    connect(listwidget,&QListWidget::itemDoubleClicked,this,&MainWindow::on_listWidget_files_itemDoubleClicked);
+    list_widget_vec.push_back(listwidget);
+    vec_tab_path.push_back("");
 }
 
 void MainWindow::on_listWidget_files_itemDoubleClicked(QListWidgetItem *item)
@@ -40,17 +48,18 @@ void MainWindow::on_listWidget_files_itemDoubleClicked(QListWidgetItem *item)
     QFileInfo info(current_dir.absolutePath() + item_name);
     QUrl fileurl = QUrl::fromLocalFile(info.absoluteFilePath());
     if(info.isDir()){
-        show_dir(item->text());
+        show_dir(item->text(),ui->tabWidget->currentIndex());
     }else{
         QDesktopServices::openUrl(fileurl);
     }
 }
 
-void MainWindow::show_dir(QString path){
+void MainWindow::show_dir(QString path,int tab_index){
     current_dir.cd(path);
-    ui->lineEdit_path->setText(current_dir.path());
-    ui->listWidget_files->clear();
-    ui->listWidget_files->setIconSize(QSize(32,32));
+    vec_tab_path[tab_index] = current_dir.path();
+    ui->lineEdit_path->setText(vec_tab_path[tab_index]);
+    list_widget_vec[tab_index]->clear(); //ui->listWidget_files->clear();
+    list_widget_vec[tab_index]->setIconSize(QSize(32,32));
     QFileInfoList file_list = current_dir.entryInfoList(QDir::NoFilter,QDir::SortFlag::DirsFirst).toList();
     foreach(auto copy, file_list){
         if(copy.fileName() != "."){
@@ -61,7 +70,7 @@ void MainWindow::show_dir(QString path){
             }else if(info.isFile()){
                 item->setIcon(QIcon::fromTheme("text-x-generic"));
             }
-            ui->listWidget_files->addItem(item);
+            list_widget_vec[tab_index]->addItem(item);
         }
     }
 
@@ -115,7 +124,7 @@ void MainWindow::on_pushButton_go_clicked()
     current_dir.setPath(dir_path);
     QFileInfo info(current_dir.path());
     if(info.isDir()){
-        show_dir(dir_path);
+        show_dir(dir_path,ui->tabWidget->currentIndex());
     }else{
         QMessageBox::about(this,"","Unknown dir:" + dir_path);
     }
@@ -125,9 +134,9 @@ void MainWindow::on_pushButton_go_clicked()
 void MainWindow::on_listWidget_libs_itemDoubleClicked(QListWidgetItem *item)
 {
     if(item->text() != QDir::homePath()){
-        show_dir(QDir::homePath() + item->text());
+        show_dir(QDir::homePath() + item->text(),ui->tabWidget->currentIndex());
     }else{
-        show_dir(QDir::homePath());
+        show_dir(QDir::homePath(),ui->tabWidget->currentIndex());
     }
 
 }
@@ -139,7 +148,7 @@ void MainWindow::on_pushButton_make_folder_clicked()
     QString folder_name = QInputDialog::getText(nullptr,"Create folder","Folder:",QLineEdit::Normal,"name",&ok);
     if(ok && !folder_name.isEmpty()){
         current_dir.mkdir(folder_name);
-        show_dir(current_dir.path());
+        show_dir(current_dir.path(),ui->tabWidget->currentIndex());
     }
 }
 
@@ -161,15 +170,15 @@ void MainWindow::on_pushButton_make_file_clicked()
         QFile file(full_path);
         file.open(QIODevice::ReadWrite);
         file.close();
-        show_dir(current_dir.path());
+        show_dir(current_dir.path(),ui->tabWidget->currentIndex());
     }
 }
 
 
 void MainWindow::on_pushButton_delete_clicked()
 {
-    if(ui->listWidget_files->currentRow() >= 0){
-        QString current_file = ui->listWidget_files->currentItem()->text();
+    if(list_widget_vec[ui->tabWidget->currentIndex()]->currentRow() >= 0){
+        QString current_file = list_widget_vec[ui->tabWidget->currentIndex()]->currentItem()->text();
         QString full_path = current_dir.path() + "/" + current_file;
         QMessageBox::StandardButton excluir = QMessageBox::question(this,"Deseja excluir","Deseja realmente excluir:" + current_file);
         if(excluir == QMessageBox::Yes){
@@ -182,7 +191,7 @@ void MainWindow::on_pushButton_delete_clicked()
                 current_dir.remove(current_file);
             }
         }
-        show_dir(current_dir.path());
+        show_dir(current_dir.path(),ui->tabWidget->currentIndex());
     }
 }
 
@@ -237,7 +246,7 @@ void MainWindow::on_pushButton_custom_refresh_clicked()
 
 void MainWindow::on_listWidget_custom_itemDoubleClicked(QListWidgetItem *item)
 {
-    show_dir(item->text());
+    show_dir(item->text(),ui->tabWidget->currentIndex());
 }
 
 
@@ -256,9 +265,8 @@ void MainWindow::on_listWidget_files_customContextMenuRequested(const QPoint &po
 
 void MainWindow::on_pushButton_copy_clicked()
 {
-    QString current_file = ui->listWidget_files->currentItem()->text();
+    QString current_file = list_widget_vec[ui->tabWidget->currentIndex()]->currentItem()->text();
     QString full_path = current_dir.path() + "/" + current_file;
-    QFileInfo info(full_path);
 
     QMessageBox::about(this,"",full_path);
     copy_file_path = full_path;
@@ -283,9 +291,11 @@ void MainWindow::on_pushButton_paste_clicked()
 
 void MainWindow::on_pushButton_move_clicked()
 {
-    QString current_file = ui->listWidget_files->currentItem()->text();
+    //QString current_file = ui->listWidget_files->currentItem()->text();
+    QString current_file = list_widget_vec[ui->tabWidget->currentIndex()]->currentItem()->text();
     QString full_path = current_dir.path() + "/" + current_file;
 
+    //QListWidget widget(widget);
     QMessageBox::about(this,"",full_path);
     copy_file_path = full_path;
     copy_file_name = current_file;
@@ -302,7 +312,7 @@ void MainWindow::on_pushButton_pastemove_clicked()
     QStringList args = {"-f",copy_full,dest};
     process.start("mv",args);
     if(process.waitForFinished()){
-        show_dir(current_dir.path());
+        show_dir(current_dir.path(),ui->tabWidget->currentIndex());
     }
 }
 
@@ -311,7 +321,7 @@ void MainWindow::on_pushButton_rename_clicked()
 {
     QString rename = QInputDialog::getText(this,"Rename to","new name:");
     if(rename != ""){
-        QString current_file = ui->listWidget_files->currentItem()->text();
+        QString current_file = list_widget_vec[ui->tabWidget->currentIndex()]->currentItem()->text();
         QString full_path = current_dir.path() + "/" + current_file;
         QString full_path_rename = current_dir.path() + "/" + rename;
         QProcess process;
@@ -327,18 +337,17 @@ void MainWindow::on_pushButton_rename_clicked()
 void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
 {
     QString search_text = arg1;
-    ui->listWidget_files->clear();
+    list_widget_vec[ui->tabWidget->currentIndex()]->clear();
     foreach(auto copy,current_dir.entryList()){
         if(copy.contains(search_text)){
             QFileInfo info(current_dir.path()+ "/" + copy);
             QListWidgetItem *item = new QListWidgetItem(copy);
             if(info.isDir()){
-                item->setIcon(QIcon(":/assets/imagens/folder2.png"));
-                //ui->listWidget_files->addItem()
+                item->setIcon(QIcon::fromTheme("folder"));
             }else if(info.isFile()){
-                item->setIcon(QIcon(":/assets/imagens/file2.ico"));
+                item->setIcon(QIcon::fromTheme("text-x-generic"));
             }
-            ui->listWidget_files->addItem(item);
+            list_widget_vec[ui->tabWidget->currentIndex()]->addItem(item);
         }
     }
 }
@@ -357,6 +366,22 @@ void MainWindow::on_pushButton_custom_delete_clicked()
 
 void MainWindow::on_listWidget_disks_itemDoubleClicked(QListWidgetItem *item)
 {
-    show_dir(item->text());
+    show_dir(item->text(),ui->tabWidget->currentIndex());
+}
+
+
+void MainWindow::on_tabWidget_tabBarDoubleClicked(int index)
+{
+    int newtab_index = index + 1;
+    make_listwidget();
+    ui->tabWidget->addTab(list_widget_vec[newtab_index],"Tab " + QString::number(newtab_index));
+    show_dir(current_dir.path(),newtab_index);
+}
+
+
+void MainWindow::on_tabWidget_currentChanged(int index)
+{
+    ui->lineEdit_path->setText(vec_tab_path[index]);
+    show_dir(vec_tab_path[index],index);
 }
 

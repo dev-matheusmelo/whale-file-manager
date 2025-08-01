@@ -1867,9 +1867,6 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "/home/ziguser/Qt/Tools/CMake/share/cmake-3.30/Modules/GNUInstallDirs.cmake"
-		},
-		{
-			"path" : "assets.qrc"
 		}
 	],
 	"kind" : "cmakeFiles",

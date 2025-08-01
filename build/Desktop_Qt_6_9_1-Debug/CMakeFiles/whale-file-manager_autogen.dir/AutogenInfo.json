@@ -447,8 +447,7 @@
 		"/home/ziguser/Qt/6.9.1/gcc_64/lib/cmake/Qt6/QtPublicWindowsHelpers.cmake",
 		"/home/ziguser/Qt/Tools/CMake/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake",
 		"/home/ziguser/Qt/6.9.1/gcc_64/lib/cmake/Qt6/Qt6Dependencies.cmake",
-		"/home/ziguser/Qt/Tools/CMake/share/cmake-3.30/Modules/GNUInstallDirs.cmake",
-		"/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/assets.qrc"
+		"/home/ziguser/Qt/Tools/CMake/share/cmake-3.30/Modules/GNUInstallDirs.cmake"
 	],
 	"CMAKE_SOURCE_DIR" : "/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager",
 	"CROSS_CONFIG" : false,

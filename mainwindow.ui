@@ -266,25 +266,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="listWidget_files">
-        <property name="mouseTracking">
-         <bool>false</bool>
-        </property>
-        <property name="contextMenuPolicy">
-         <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="defaultDropAction">
-         <enum>Qt::DropAction::MoveAction</enum>
-        </property>
-        <property name="viewMode">
-         <enum>QListView::ViewMode::ListMode</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="pushButton_rename">
         <property name="text">
          <string>RENAME</string>

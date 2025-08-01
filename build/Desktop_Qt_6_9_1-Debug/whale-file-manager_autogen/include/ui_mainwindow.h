@@ -50,7 +50,6 @@ public:
     QPushButton *pushButton_make_file;
     QLineEdit *lineEdit_search;
     QTabWidget *tabWidget;
-    QListWidget *listWidget_files;
     QPushButton *pushButton_rename;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *pushButton_move;
@@ -202,16 +201,6 @@ public:
         tabWidget->setObjectName("tabWidget");
 
         verticalLayout_2->addWidget(tabWidget);
-
-        listWidget_files = new QListWidget(centralwidget);
-        listWidget_files->setObjectName("listWidget_files");
-        listWidget_files->setMouseTracking(false);
-        listWidget_files->setContextMenuPolicy(Qt::ContextMenuPolicy::CustomContextMenu);
-        listWidget_files->setStyleSheet(QString::fromUtf8(""));
-        listWidget_files->setDefaultDropAction(Qt::DropAction::MoveAction);
-        listWidget_files->setViewMode(QListView::ViewMode::ListMode);
-
-        verticalLayout_2->addWidget(listWidget_files);
 
         pushButton_rename = new QPushButton(centralwidget);
         pushButton_rename->setObjectName("pushButton_rename");
