@@ -37,6 +37,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::make_listwidget(){
     QListWidget *listwidget = new QListWidget(centralWidget());
+    listwidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
     connect(listwidget,&QListWidget::itemDoubleClicked,this,&MainWindow::on_listWidget_files_itemDoubleClicked);
     list_widget_vec.push_back(listwidget);
     vec_tab_path.push_back("");
@@ -60,7 +61,8 @@ void MainWindow::show_dir(QString path,int tab_index){
     ui->lineEdit_path->setText(vec_tab_path[tab_index]);
     list_widget_vec[tab_index]->clear(); //ui->listWidget_files->clear();
     list_widget_vec[tab_index]->setIconSize(QSize(32,32));
-    QFileInfoList file_list = current_dir.entryInfoList(QDir::NoFilter,QDir::SortFlag::DirsFirst).toList();
+
+    QFileInfoList file_list = current_dir.entryInfoList(QDir::NoFilter,QDir::SortFlag::DirsFirst | QDir::SortFlag::Name | QDir::SortFlag::IgnoreCase).toList();
     foreach(auto copy, file_list){
         if(copy.fileName() != "."){
             QFileInfo info(current_dir.path()+ "/" + copy.fileName());
@@ -71,6 +73,7 @@ void MainWindow::show_dir(QString path,int tab_index){
                 item->setIcon(QIcon::fromTheme("text-x-generic"));
             }
             list_widget_vec[tab_index]->addItem(item);
+            //list_widget_vec[tab_index]->sortItems(Qt::SortOrder::AscendingOrder);
         }
     }
 
@@ -146,6 +149,7 @@ void MainWindow::on_pushButton_make_folder_clicked()
 {
     bool ok;
     QString folder_name = QInputDialog::getText(nullptr,"Create folder","Folder:",QLineEdit::Normal,"name",&ok);
+
     if(ok && !folder_name.isEmpty()){
         current_dir.mkdir(folder_name);
         show_dir(current_dir.path(),ui->tabWidget->currentIndex());
@@ -265,55 +269,70 @@ void MainWindow::on_listWidget_files_customContextMenuRequested(const QPoint &po
 
 void MainWindow::on_pushButton_copy_clicked()
 {
-    QString current_file = list_widget_vec[ui->tabWidget->currentIndex()]->currentItem()->text();
-    QString full_path = current_dir.path() + "/" + current_file;
-
-    QMessageBox::about(this,"",full_path);
-    copy_file_path = full_path;
-    copy_file_name = current_file;
-    ui->pushButton_paste->setEnabled(true);
+    copy_files_paths.clear();
+    QList selected_items = list_widget_vec[ui->tabWidget->currentIndex()]->selectedItems();
+    QString select_files = "";
+    if(selected_items.size() > 0){
+        foreach(auto copy_item,selected_items){
+            QString full_path = current_dir.path() + "/" + copy_item->text();
+            select_files += full_path + "\n";
+            copy_files_paths.push_back(full_path);
+        }
+        QMessageBox::about(this,"Selected files",select_files);
+        ui->pushButton_paste->setEnabled(true);
+    }else{
+        QMessageBox::about(this,"error","Select at least one item");
+    }
 }
 
 
 void MainWindow::on_pushButton_paste_clicked()
 {
-    QString copy_full = copy_file_path;
     QString dest = current_dir.path();
-    QMessageBox::about(this,"","copy:" + copy_full + "\n" + "dest:"+dest);
-    QProcess process;
-    QStringList args = {"-r",copy_full,dest};
-    process.start("cp",args);
-    if(process.waitForFinished()){
-        show_dir(current_dir.path());
+    foreach(auto copy,copy_files_paths){
+        QProcess process;
+        QStringList args = {"-r",copy,dest};
+        process.start("cp",args);
+        if(process.waitForFinished()){
+            show_dir(current_dir.path(),ui->tabWidget->currentIndex());
+        }
     }
+    QMessageBox::about(this,"","paste finished");
 }
 
 
 void MainWindow::on_pushButton_move_clicked()
 {
-    //QString current_file = ui->listWidget_files->currentItem()->text();
-    QString current_file = list_widget_vec[ui->tabWidget->currentIndex()]->currentItem()->text();
-    QString full_path = current_dir.path() + "/" + current_file;
-
-    //QListWidget widget(widget);
-    QMessageBox::about(this,"",full_path);
-    copy_file_path = full_path;
-    copy_file_name = current_file;
-    ui->pushButton_pastemove->setEnabled(true);
+    copy_files_paths.clear();
+    QList select_items = list_widget_vec[ui->tabWidget->currentIndex()]->selectedItems();
+    if(select_items.size() > 0){
+        QString select_files = "";
+        foreach(auto copy_item,select_items){
+            QString current_file = copy_item->text();
+            QString full_path = current_dir.path() + "/" + current_file;
+            select_files += full_path + "\n";
+            copy_files_paths.push_back(full_path);
+        }
+        QMessageBox::about(this,"selected files:",select_files);
+        ui->pushButton_pastemove->setEnabled(true);
+    }else{
+        QMessageBox::about(this,"error","Select at least one item from list");
+    }
 }
 
 
 void MainWindow::on_pushButton_pastemove_clicked()
 {
-    QString copy_full = copy_file_path;
     QString dest = current_dir.path();
-    QMessageBox::about(this,"","copy:" + copy_full + "\n" + "dest:"+dest);
-    QProcess process;
-    QStringList args = {"-f",copy_full,dest};
-    process.start("mv",args);
-    if(process.waitForFinished()){
-        show_dir(current_dir.path(),ui->tabWidget->currentIndex());
+    foreach(auto copy,copy_files_paths){
+        QProcess process;
+        QStringList args = {"-f",copy,dest};
+        process.start("mv",args);
+        if(process.waitForFinished()){
+            show_dir(current_dir.path(),ui->tabWidget->currentIndex());
+        }
     }
+    QMessageBox::about(this,"Advice","File move finished");
 }
 
 
@@ -339,15 +358,17 @@ void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
     QString search_text = arg1;
     list_widget_vec[ui->tabWidget->currentIndex()]->clear();
     foreach(auto copy,current_dir.entryList()){
-        if(copy.contains(search_text)){
-            QFileInfo info(current_dir.path()+ "/" + copy);
-            QListWidgetItem *item = new QListWidgetItem(copy);
-            if(info.isDir()){
-                item->setIcon(QIcon::fromTheme("folder"));
-            }else if(info.isFile()){
-                item->setIcon(QIcon::fromTheme("text-x-generic"));
+        if(copy != "."){
+            if(copy.contains(search_text)){
+                QFileInfo info(current_dir.path()+ "/" + copy);
+                QListWidgetItem *item = new QListWidgetItem(copy);
+                if(info.isDir()){
+                    item->setIcon(QIcon::fromTheme("folder"));
+                }else if(info.isFile()){
+                    item->setIcon(QIcon::fromTheme("text-x-generic"));
+                }
+                list_widget_vec[ui->tabWidget->currentIndex()]->addItem(item);
             }
-            list_widget_vec[ui->tabWidget->currentIndex()]->addItem(item);
         }
     }
 }

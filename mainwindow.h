@@ -20,8 +20,7 @@ private:
     void show_dir(QString path,int tab_index = 0);
     QDir home_dir = QDir::homePath();
     QDir current_dir;
-    QString copy_file_path;
-    QString copy_file_name;
+    QVector<QString>copy_files_paths;
     QVector<QString>saved_paths;
     Ui::MainWindow *ui;
     void make_listwidget();

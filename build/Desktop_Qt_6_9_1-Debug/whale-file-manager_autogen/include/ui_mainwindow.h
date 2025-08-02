@@ -127,6 +127,7 @@ public:
         listWidget_custom->setObjectName("listWidget_custom");
         listWidget_custom->setMinimumSize(QSize(256, 217));
         listWidget_custom->setMaximumSize(QSize(256, 217));
+        listWidget_custom->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
 
         verticalLayout->addWidget(listWidget_custom);
 
