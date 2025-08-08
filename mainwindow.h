@@ -31,7 +31,7 @@ public:
     ~MainWindow();
 
 private slots:
-
+    void context_menu(const QPoint& pos);
     void on_listWidget_files_itemDoubleClicked(QListWidgetItem *item);
 
     void on_lineEdit_path_returnPressed();

@@ -148,6 +148,9 @@
           <height>217</height>
          </size>
         </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::ContextMenuPolicy::CustomContextMenu</enum>
+        </property>
         <property name="selectionMode">
          <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
         </property>
@@ -280,7 +283,7 @@
         <item>
          <widget class="QPushButton" name="pushButton_move">
           <property name="text">
-           <string>Move</string>
+           <string>Crop</string>
           </property>
           <property name="icon">
            <iconset theme="QIcon::ThemeIcon::GoNext"/>
@@ -293,7 +296,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>Paste move</string>
+           <string>Paste Crop</string>
           </property>
          </widget>
         </item>
@@ -337,6 +340,17 @@
     </item>
    </layout>
   </widget>
+  <action name="actioncopy">
+   <property name="text">
+    <string>copy</string>
+   </property>
+   <property name="toolTip">
+    <string>none</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

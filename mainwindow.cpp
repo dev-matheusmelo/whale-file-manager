@@ -35,10 +35,59 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::context_menu(const QPoint& pos){
+    QMenu menu_de_contexto(this);
+
+    QAction* copiar = menu_de_contexto.addAction("Copy");
+    QAction* colar = menu_de_contexto.addAction("Paste");
+    QAction* move = menu_de_contexto.addAction("Crop");
+    QAction* move_paste = menu_de_contexto.addAction("Crop paste");
+    QAction* rename = menu_de_contexto.addAction("Rename");
+    QAction* delete_context = menu_de_contexto.addAction("Delete");
+    QAction* make_folder = menu_de_contexto.addAction("Make folder");
+    QAction* make_file = menu_de_contexto.addAction("Make file");
+    QAction* acao_selecionada = menu_de_contexto.exec(ui->listWidget_custom->mapToGlobal(pos));
+    if (acao_selecionada == copiar) {
+        MainWindow::on_pushButton_copy_clicked();
+    } else if (acao_selecionada == colar) {
+        if(!copy_files_paths.empty()){
+            MainWindow::on_pushButton_paste_clicked();
+        }else{
+            QMessageBox::about(this,"error","Copy at least one item");
+        }
+    }else if(acao_selecionada == move){
+        MainWindow::on_pushButton_move_clicked();
+    }else if(acao_selecionada == move_paste){
+        if(!copy_files_paths.empty()){
+            MainWindow::on_pushButton_pastemove_clicked();
+        }else{
+            QMessageBox::about(this,"error","Copy at least one item");
+        }
+    }else if(acao_selecionada == rename){
+        if(list_widget_vec[ui->tabWidget->currentIndex()]->currentItem()->isSelected()){
+            MainWindow::on_pushButton_rename_clicked();
+        }else{
+            QMessageBox::about(this,"error","Select at least one item to rename");
+        }
+    }else if(acao_selecionada == delete_context){
+        if(list_widget_vec[ui->tabWidget->currentIndex()]->currentItem()->isSelected()){
+            MainWindow::on_pushButton_delete_clicked();
+        }else{
+            QMessageBox::about(this,"error","Select at least one item to delete");
+        }
+    }else if(acao_selecionada == make_file){
+        MainWindow::on_pushButton_make_file_clicked();
+    }else if(acao_selecionada == make_folder){
+        MainWindow::on_pushButton_make_folder_clicked();
+    }
+}
+
 void MainWindow::make_listwidget(){
     QListWidget *listwidget = new QListWidget(centralWidget());
     listwidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
     connect(listwidget,&QListWidget::itemDoubleClicked,this,&MainWindow::on_listWidget_files_itemDoubleClicked);
+    listwidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(listwidget,&QListWidget::customContextMenuRequested,this,&MainWindow::context_menu);
     list_widget_vec.push_back(listwidget);
     vec_tab_path.push_back("");
 }
@@ -181,18 +230,17 @@ void MainWindow::on_pushButton_make_file_clicked()
 
 void MainWindow::on_pushButton_delete_clicked()
 {
-    if(list_widget_vec[ui->tabWidget->currentIndex()]->currentRow() >= 0){
-        QString current_file = list_widget_vec[ui->tabWidget->currentIndex()]->currentItem()->text();
-        QString full_path = current_dir.path() + "/" + current_file;
-        QMessageBox::StandardButton excluir = QMessageBox::question(this,"Deseja excluir","Deseja realmente excluir:" + current_file);
-        if(excluir == QMessageBox::Yes){
-            QFileInfo info(full_path);
-            if(info.isDir()){
-                current_dir.setPath(full_path);
-                current_dir.removeRecursively();
-                current_dir.cdUp();
-            }else{
-                current_dir.remove(current_file);
+    QList selected_items = list_widget_vec[ui->tabWidget->currentIndex()]->selectedItems();
+    if(!selected_items.empty()){
+        QMessageBox::StandardButton button = QMessageBox::question(this,"","Deseja realmente excluir ?");
+        if(button == QMessageBox::Yes){
+            QMessageBox::about(this,"","começando exclusao");
+            foreach(auto copy,selected_items){
+                QString full_path = current_dir.path() + "/" + copy->text();
+                QProcess process;
+                QStringList args{"-rf",full_path};
+                process.start("rm",args);
+                process.waitForFinished();
             }
         }
         show_dir(current_dir.path(),ui->tabWidget->currentIndex());

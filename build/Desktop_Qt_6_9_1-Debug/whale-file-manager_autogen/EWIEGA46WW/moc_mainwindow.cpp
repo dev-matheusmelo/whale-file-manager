@@ -39,8 +39,10 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "MainWindow",
-        "on_listWidget_files_itemDoubleClicked",
+        "context_menu",
         "",
+        "pos",
+        "on_listWidget_files_itemDoubleClicked",
         "QListWidgetItem*",
         "item",
         "on_lineEdit_path_returnPressed",
@@ -51,7 +53,6 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "on_pushButton_addcustom_clicked",
         "on_listWidget_custom_itemDoubleClicked",
         "on_listWidget_files_customContextMenuRequested",
-        "pos",
         "on_pushButton_copy_clicked",
         "on_pushButton_paste_clicked",
         "on_pushButton_move_clicked",
@@ -70,65 +71,69 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Slot 'context_menu'
+        QtMocHelpers::SlotData<void(const QPoint &)>(1, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QPoint, 3 },
+        }}),
         // Slot 'on_listWidget_files_itemDoubleClicked'
-        QtMocHelpers::SlotData<void(QListWidgetItem *)>(1, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 3, 4 },
+        QtMocHelpers::SlotData<void(QListWidgetItem *)>(4, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 5, 6 },
         }}),
         // Slot 'on_lineEdit_path_returnPressed'
-        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_go_clicked'
-        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_listWidget_libs_itemDoubleClicked'
-        QtMocHelpers::SlotData<void(QListWidgetItem *)>(7, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 3, 4 },
+        QtMocHelpers::SlotData<void(QListWidgetItem *)>(9, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 5, 6 },
         }}),
         // Slot 'on_pushButton_make_folder_clicked'
-        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_make_file_clicked'
-        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_addcustom_clicked'
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButton_make_file_clicked'
+        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButton_addcustom_clicked'
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_listWidget_custom_itemDoubleClicked'
-        QtMocHelpers::SlotData<void(QListWidgetItem *)>(11, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 3, 4 },
+        QtMocHelpers::SlotData<void(QListWidgetItem *)>(13, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 5, 6 },
         }}),
         // Slot 'on_listWidget_files_customContextMenuRequested'
-        QtMocHelpers::SlotData<void(const QPoint &)>(12, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::QPoint, 13 },
+        QtMocHelpers::SlotData<void(const QPoint &)>(14, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QPoint, 3 },
         }}),
         // Slot 'on_pushButton_copy_clicked'
-        QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_paste_clicked'
         QtMocHelpers::SlotData<void()>(15, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_move_clicked'
+        // Slot 'on_pushButton_paste_clicked'
         QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_pastemove_clicked'
+        // Slot 'on_pushButton_move_clicked'
         QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_delete_clicked'
+        // Slot 'on_pushButton_pastemove_clicked'
         QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_rename_clicked'
+        // Slot 'on_pushButton_delete_clicked'
         QtMocHelpers::SlotData<void()>(19, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButton_rename_clicked'
+        QtMocHelpers::SlotData<void()>(20, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_lineEdit_search_textChanged'
-        QtMocHelpers::SlotData<void(const QString &)>(20, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::QString, 21 },
+        QtMocHelpers::SlotData<void(const QString &)>(21, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 22 },
         }}),
         // Slot 'on_pushButton_save_custom_clicked'
-        QtMocHelpers::SlotData<void()>(22, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_custom_refresh_clicked'
         QtMocHelpers::SlotData<void()>(23, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_pushButton_custom_delete_clicked'
+        // Slot 'on_pushButton_custom_refresh_clicked'
         QtMocHelpers::SlotData<void()>(24, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButton_custom_delete_clicked'
+        QtMocHelpers::SlotData<void()>(25, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_listWidget_disks_itemDoubleClicked'
-        QtMocHelpers::SlotData<void(QListWidgetItem *)>(25, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 3, 4 },
+        QtMocHelpers::SlotData<void(QListWidgetItem *)>(26, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 5, 6 },
         }}),
         // Slot 'on_tabWidget_tabBarDoubleClicked'
-        QtMocHelpers::SlotData<void(int)>(26, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::Int, 27 },
+        QtMocHelpers::SlotData<void(int)>(27, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 28 },
         }}),
         // Slot 'on_tabWidget_currentChanged'
-        QtMocHelpers::SlotData<void(int)>(28, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::Int, 27 },
+        QtMocHelpers::SlotData<void(int)>(29, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 28 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -153,28 +158,29 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     auto *_t = static_cast<MainWindow *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->on_listWidget_files_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
-        case 1: _t->on_lineEdit_path_returnPressed(); break;
-        case 2: _t->on_pushButton_go_clicked(); break;
-        case 3: _t->on_listWidget_libs_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
-        case 4: _t->on_pushButton_make_folder_clicked(); break;
-        case 5: _t->on_pushButton_make_file_clicked(); break;
-        case 6: _t->on_pushButton_addcustom_clicked(); break;
-        case 7: _t->on_listWidget_custom_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
-        case 8: _t->on_listWidget_files_customContextMenuRequested((*reinterpret_cast< std::add_pointer_t<QPoint>>(_a[1]))); break;
-        case 9: _t->on_pushButton_copy_clicked(); break;
-        case 10: _t->on_pushButton_paste_clicked(); break;
-        case 11: _t->on_pushButton_move_clicked(); break;
-        case 12: _t->on_pushButton_pastemove_clicked(); break;
-        case 13: _t->on_pushButton_delete_clicked(); break;
-        case 14: _t->on_pushButton_rename_clicked(); break;
-        case 15: _t->on_lineEdit_search_textChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 16: _t->on_pushButton_save_custom_clicked(); break;
-        case 17: _t->on_pushButton_custom_refresh_clicked(); break;
-        case 18: _t->on_pushButton_custom_delete_clicked(); break;
-        case 19: _t->on_listWidget_disks_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
-        case 20: _t->on_tabWidget_tabBarDoubleClicked((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 21: _t->on_tabWidget_currentChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 0: _t->context_menu((*reinterpret_cast< std::add_pointer_t<QPoint>>(_a[1]))); break;
+        case 1: _t->on_listWidget_files_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 2: _t->on_lineEdit_path_returnPressed(); break;
+        case 3: _t->on_pushButton_go_clicked(); break;
+        case 4: _t->on_listWidget_libs_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 5: _t->on_pushButton_make_folder_clicked(); break;
+        case 6: _t->on_pushButton_make_file_clicked(); break;
+        case 7: _t->on_pushButton_addcustom_clicked(); break;
+        case 8: _t->on_listWidget_custom_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 9: _t->on_listWidget_files_customContextMenuRequested((*reinterpret_cast< std::add_pointer_t<QPoint>>(_a[1]))); break;
+        case 10: _t->on_pushButton_copy_clicked(); break;
+        case 11: _t->on_pushButton_paste_clicked(); break;
+        case 12: _t->on_pushButton_move_clicked(); break;
+        case 13: _t->on_pushButton_pastemove_clicked(); break;
+        case 14: _t->on_pushButton_delete_clicked(); break;
+        case 15: _t->on_pushButton_rename_clicked(); break;
+        case 16: _t->on_lineEdit_search_textChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 17: _t->on_pushButton_save_custom_clicked(); break;
+        case 18: _t->on_pushButton_custom_refresh_clicked(); break;
+        case 19: _t->on_pushButton_custom_delete_clicked(); break;
+        case 20: _t->on_listWidget_disks_itemDoubleClicked((*reinterpret_cast< std::add_pointer_t<QListWidgetItem*>>(_a[1]))); break;
+        case 21: _t->on_tabWidget_tabBarDoubleClicked((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 22: _t->on_tabWidget_currentChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
         }
     }
@@ -199,14 +205,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 22)
+        if (_id < 23)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 22;
+        _id -= 23;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 22)
+        if (_id < 23)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 22;
+        _id -= 23;
     }
     return _id;
 }

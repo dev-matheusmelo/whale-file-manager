@@ -10,6 +10,7 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QAction>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
@@ -27,6 +28,7 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actioncopy;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout_6;
     QVBoxLayout *verticalLayout;
@@ -71,6 +73,9 @@ public:
         MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setAutoFillBackground(false);
         MainWindow->setStyleSheet(QString::fromUtf8("font: 14pt \"Sans Serif\";"));
+        actioncopy = new QAction(MainWindow);
+        actioncopy->setObjectName("actioncopy");
+        actioncopy->setMenuRole(QAction::MenuRole::NoRole);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         horizontalLayout_6 = new QHBoxLayout(centralwidget);
@@ -127,6 +132,7 @@ public:
         listWidget_custom->setObjectName("listWidget_custom");
         listWidget_custom->setMinimumSize(QSize(256, 217));
         listWidget_custom->setMaximumSize(QSize(256, 217));
+        listWidget_custom->setContextMenuPolicy(Qt::ContextMenuPolicy::CustomContextMenu);
         listWidget_custom->setSelectionMode(QAbstractItemView::SelectionMode::SingleSelection);
 
         verticalLayout->addWidget(listWidget_custom);
@@ -267,6 +273,10 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Whale File Manager", nullptr));
+        actioncopy->setText(QCoreApplication::translate("MainWindow", "copy", nullptr));
+#if QT_CONFIG(tooltip)
+        actioncopy->setToolTip(QCoreApplication::translate("MainWindow", "none", nullptr));
+#endif // QT_CONFIG(tooltip)
         label->setText(QCoreApplication::translate("MainWindow", "Rapid Access:", nullptr));
         pushButton_addcustom->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         pushButton_custom_delete->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
@@ -282,8 +292,8 @@ public:
         lineEdit_search->setText(QString());
         lineEdit_search->setPlaceholderText(QCoreApplication::translate("MainWindow", "Search", nullptr));
         pushButton_rename->setText(QCoreApplication::translate("MainWindow", "RENAME", nullptr));
-        pushButton_move->setText(QCoreApplication::translate("MainWindow", "Move", nullptr));
-        pushButton_pastemove->setText(QCoreApplication::translate("MainWindow", "Paste move", nullptr));
+        pushButton_move->setText(QCoreApplication::translate("MainWindow", "Crop", nullptr));
+        pushButton_pastemove->setText(QCoreApplication::translate("MainWindow", "Paste Crop", nullptr));
         pushButton_copy->setText(QCoreApplication::translate("MainWindow", "Copy", nullptr));
         pushButton_paste->setText(QCoreApplication::translate("MainWindow", "Paste", nullptr));
         pushButton_delete->setText(QCoreApplication::translate("MainWindow", "DELETE", nullptr));
