@@ -14,6 +14,8 @@
 #include "QInputDialog"
 #include "qmenu.h"
 #include "QProcess"
+#include "QTableWidget"
+#include <qcolumnview.h>
 MainWindow::MainWindow(QWidget *parent,QString dir)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -28,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent,QString dir)
     make_listwidget();
     ui->tabWidget->addTab(list_widget_vec[0],"Tab");
     show_dir(current_dir.path());
+    connect(ui->listWidget_custom,&QListWidget::customContextMenuRequested,this,&MainWindow::custom_context_shortcut);
+
 }
 
 MainWindow::~MainWindow()
@@ -82,6 +86,25 @@ void MainWindow::context_menu(const QPoint& pos){
     }
 }
 
+void MainWindow::custom_context_shortcut(const QPoint& pos){
+    QMenu context_menu("menu");
+
+    QAction* salvar = context_menu.addAction("save");
+    QAction* apagar = context_menu.addAction("delete");
+    QAction* adicionar = context_menu.addAction("Add shortcut");
+    QAction* refresh = context_menu.addAction("Refresh shortcuts");
+    QAction* context_escolhido = context_menu.exec(ui->listWidget_custom->mapToGlobal(pos));
+    if(context_escolhido == salvar){
+        MainWindow::on_pushButton_save_custom_clicked();
+    }else if(context_escolhido == apagar){
+        MainWindow::on_pushButton_custom_delete_clicked();
+    }else if(context_escolhido == adicionar){
+        MainWindow::on_pushButton_addcustom_clicked();
+    }else if(context_escolhido == refresh){
+        MainWindow::on_pushButton_custom_refresh_clicked();
+    }
+}
+
 void MainWindow::make_listwidget(){
     QListWidget *listwidget = new QListWidget(centralWidget());
     listwidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
@@ -90,6 +113,7 @@ void MainWindow::make_listwidget(){
     connect(listwidget,&QListWidget::customContextMenuRequested,this,&MainWindow::context_menu);
     list_widget_vec.push_back(listwidget);
     vec_tab_path.push_back("");
+
 }
 
 void MainWindow::on_listWidget_files_itemDoubleClicked(QListWidgetItem *item)
