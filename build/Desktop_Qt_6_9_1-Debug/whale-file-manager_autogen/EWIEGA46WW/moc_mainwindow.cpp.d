@@ -180,6 +180,8 @@
   /home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qstyle.h \
   /home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qstyleoption.h \
   /home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtabbar.h \
+  /home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtableview.h \
+  /home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtablewidget.h \
   /home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtabwidget.h \
   /home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
   /home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtwidgetsexports.h \

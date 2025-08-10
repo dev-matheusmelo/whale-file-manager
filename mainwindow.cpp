@@ -16,6 +16,7 @@
 #include "QProcess"
 #include "QTableWidget"
 #include <qcolumnview.h>
+#include "QHeaderView"
 MainWindow::MainWindow(QWidget *parent,QString dir)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -28,10 +29,12 @@ MainWindow::MainWindow(QWidget *parent,QString dir)
     show_volumes();
     show_libs();
     make_listwidget();
+    //make_tablewidget();
     ui->tabWidget->addTab(list_widget_vec[0],"Tab");
     show_dir(current_dir.path());
+    //show_dir_table(current_dir.path(),0);
     connect(ui->listWidget_custom,&QListWidget::customContextMenuRequested,this,&MainWindow::custom_context_shortcut);
-
+    //connect(list_widget_vec[0],QListWidget::act)
 }
 
 MainWindow::~MainWindow()
@@ -113,8 +116,61 @@ void MainWindow::make_listwidget(){
     connect(listwidget,&QListWidget::customContextMenuRequested,this,&MainWindow::context_menu);
     list_widget_vec.push_back(listwidget);
     vec_tab_path.push_back("");
+}
+
+void MainWindow::make_tablewidget(){
+    QTableWidget *tablewidget = new QTableWidget(centralWidget());
+    tablewidget->setMinimumSize(QSize(590,300));
+    tablewidget->clearContents();
+    tablewidget->setColumnCount(3);
+    tablewidget->setHorizontalHeaderLabels({"name","date","size"});
+    tablewidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+
+    ui->tabWidget->addTab(tablewidget,"table");
+
+    connect(tablewidget,&QTableWidget::itemDoubleClicked,this,&MainWindow::table_double_clicked);
+    table_widget_vec.push_back(tablewidget);
 
 }
+
+void MainWindow::show_dir_table(QString path,int tab_index){
+    table_widget_vec[tab_index]->clear();
+    current_dir.cd(path);
+    QFileInfoList files_list = current_dir.entryInfoList(QDir::NoFilter,QDir::DirsFirst);
+    table_widget_vec[tab_index]->setRowCount(files_list.size());
+    int index = 0;
+    foreach(auto copy , files_list){
+        QTableWidgetItem *item_name = new QTableWidgetItem(copy.fileName());
+        QTableWidgetItem *item_size = new QTableWidgetItem;
+        QTableWidgetItem *item_date = new QTableWidgetItem(copy.birthTime().date().toString());
+        QFileInfo file(copy.absoluteFilePath());
+        if(file.isFile()){
+            qint64 tamanho_bytes = (double)file.size();
+            double tamanho_kb = static_cast<double>(tamanho_bytes) / 1024.0;
+            double tamanho_mb = static_cast<double>(tamanho_bytes) / (1024 * 1024);
+            if(tamanho_bytes < 1024){
+                item_size->setText(QString::number(tamanho_bytes) + " bytes");
+            }else if(tamanho_bytes >= 1024 && tamanho_bytes < 1000000){
+                item_size->setText(QString::number(tamanho_kb) + " kb");
+            }else if(tamanho_bytes >= 1000000){
+                item_size->setText(QString::number(tamanho_mb,'f',2) + " mb");
+            }else{
+                item_size->setText(QString::number(tamanho_bytes) + " bytes");
+            }
+            table_widget_vec[tab_index]->setItem(index,2,item_size);
+        }
+        table_widget_vec[tab_index]->setItem(index,1,item_date);
+        table_widget_vec[tab_index]->setItem(index,0,item_name);
+        index++;
+    }
+}
+
+void MainWindow::table_double_clicked(QTableWidgetItem *item){
+    //QMessageBox::about(this,"",item->text());
+    show_dir_table(item->text(),ui->tabWidget->currentIndex());
+}
+
+
 
 void MainWindow::on_listWidget_files_itemDoubleClicked(QListWidgetItem *item)
 {
@@ -143,9 +199,21 @@ void MainWindow::show_dir(QString path,int tab_index){
             if(info.isDir()){
                 item->setIcon(QIcon::fromTheme("folder"));
             }else if(info.isFile()){
+                quint64 tamanho_bytes = info.size();
+                double tamanho_kb = info.size() / 1024;
+                double tamanho_mb = double(info.size()) / (1024 * 1024);
+                if(info.size() < 1000){
+                    item->setToolTip(QString::number(tamanho_bytes) + " bytes");
+                }else if(info.size() > 1000 && info.size() < 1000000){
+                    item->setToolTip(QString::number(tamanho_kb) + " kb");
+                }else{
+                    item->setToolTip(QString::number(tamanho_mb,'f',2) + " mb");
+                }
+
                 item->setIcon(QIcon::fromTheme("text-x-generic"));
             }
             list_widget_vec[tab_index]->addItem(item);
+
             //list_widget_vec[tab_index]->sortItems(Qt::SortOrder::AscendingOrder);
         }
     }

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <qdir.h>
 #include <qlistwidget.h>
+#include <qtablewidget.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,19 +19,24 @@ private:
     void show_libs();
     void show_volumes();
     void show_dir(QString path,int tab_index = 0);
+    void show_dir_table(QString path,int tab_index);
     QDir home_dir = QDir::homePath();
     QDir current_dir;
     QVector<QString>copy_files_paths;
     QVector<QString>saved_paths;
     Ui::MainWindow *ui;
     void make_listwidget();
+    void make_tablewidget();
     QVector<QListWidget*>list_widget_vec;
+    QVector<QTableWidget*>table_widget_vec;
     QVector<QString>vec_tab_path;
+
 public:
     MainWindow(QWidget *parent = nullptr,QString dir = "");
     ~MainWindow();
 
 private slots:
+    void table_double_clicked(QTableWidgetItem *item);
     void context_menu(const QPoint& pos);
     void custom_context_shortcut(const QPoint& pos);
     void on_listWidget_files_itemDoubleClicked(QListWidgetItem *item);

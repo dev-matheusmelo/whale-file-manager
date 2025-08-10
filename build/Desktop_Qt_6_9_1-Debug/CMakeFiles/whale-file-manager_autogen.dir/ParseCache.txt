@@ -183,6 +183,8 @@
  mdp:/home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qstyle.h
  mdp:/home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qstyleoption.h
  mdp:/home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtabbar.h
+ mdp:/home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtableview.h
+ mdp:/home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtablewidget.h
  mdp:/home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtabwidget.h
  mdp:/home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtwidgets-config.h
  mdp:/home/ziguser/Qt/6.9.1/gcc_64/include/QtWidgets/qtwidgetsexports.h
@@ -482,6 +484,6 @@
  mdp:/usr/lib/gcc/x86_64-linux-gnu/12/include/stdbool.h
  mdp:/usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h
  mdp:/usr/lib/linux/uapi/x86/asm/errno.h
-/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/main.cpp
 /home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/mainwindow.cpp
  uic:./ui_mainwindow.h
+/home/ziguser/Documentos/sources/qt_cpp/whale-file-manager/main.cpp
