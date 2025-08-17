@@ -29,12 +29,9 @@ MainWindow::MainWindow(QWidget *parent,QString dir)
     show_volumes();
     show_libs();
     make_listwidget();
-    //make_tablewidget();
     ui->tabWidget->addTab(list_widget_vec[0],"Tab");
     show_dir(current_dir.path());
-    //show_dir_table(current_dir.path(),0);
     connect(ui->listWidget_custom,&QListWidget::customContextMenuRequested,this,&MainWindow::custom_context_shortcut);
-    //connect(list_widget_vec[0],QListWidget::act)
 }
 
 MainWindow::~MainWindow()
@@ -118,18 +115,57 @@ void MainWindow::make_listwidget(){
     vec_tab_path.push_back("");
 }
 
-void MainWindow::make_tablewidget(){
-    QTableWidget *tablewidget = new QTableWidget(centralWidget());
-    tablewidget->setMinimumSize(QSize(590,300));
-    tablewidget->clearContents();
-    tablewidget->setColumnCount(3);
-    tablewidget->setHorizontalHeaderLabels({"name","date","size"});
-    tablewidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+void MainWindow::table_double_clicked(QTableWidgetItem *item){
+    //QMessageBox::about(this,"",item->text());
+    show_dir_table(item->text(),ui->tabWidget->currentIndex());
+}
 
-    ui->tabWidget->addTab(tablewidget,"table");
 
-    connect(tablewidget,&QTableWidget::itemDoubleClicked,this,&MainWindow::table_double_clicked);
-    table_widget_vec.push_back(tablewidget);
+
+void MainWindow::on_listWidget_files_itemDoubleClicked(QListWidgetItem *item)
+{
+    QString item_name = "/" + item->text();
+    QFileInfo info(current_dir.absolutePath() + item_name);
+    QUrl fileurl = QUrl::fromLocalFile(info.absoluteFilePath());
+    if(info.isDir()){
+        show_dir(item->text(),ui->tabWidget->currentIndex());
+    }else{
+        QDesktopServices::openUrl(fileurl);
+    }
+}
+
+void MainWindow::show_dir(QString path,int tab_index){
+    current_dir.cd(path);
+    vec_tab_path[tab_index] = current_dir.path();
+    ui->lineEdit_path->setText(vec_tab_path[tab_index]);
+    list_widget_vec[tab_index]->clear();
+    list_widget_vec[tab_index]->setIconSize(QSize(32,32));
+
+    QFileInfoList file_list = current_dir.entryInfoList(QDir::NoFilter,QDir::SortFlag::DirsFirst | QDir::SortFlag::Name | QDir::SortFlag::IgnoreCase).toList();
+    foreach(auto copy, file_list){
+        if(copy.fileName() != "."){
+            QFileInfo info(current_dir.path()+ "/" + copy.fileName());
+            QListWidgetItem *item = new QListWidgetItem(copy.fileName());
+            if(info.isDir()){
+                item->setIcon(QIcon::fromTheme("folder"));
+            }else if(info.isFile()){
+                quint64 tamanho_bytes = info.size();
+                double tamanho_kb = double(info.size()) / 1024;
+                double tamanho_mb = double(info.size()) / (1024 * 1024);
+
+                if(info.size() < 1000){
+                    item->setToolTip(info.birthTime().toString() + "\n" + QString::number(tamanho_bytes) + " bytes");
+                }else if(info.size() > 1000 && info.size() < 1000000){
+                    item->setToolTip(info.birthTime().toString() + "\n" + QString::number(tamanho_kb,'f',2) + " kb");
+                }else{
+                    item->setToolTip(info.birthTime().toString() + "\n" + QString::number(tamanho_mb,'f',2) + " mb");
+                }
+
+                item->setIcon(QIcon::fromTheme("text-x-generic"));
+            }
+            list_widget_vec[tab_index]->addItem(item);
+        }
+    }
 
 }
 
@@ -138,6 +174,8 @@ void MainWindow::show_dir_table(QString path,int tab_index){
     current_dir.cd(path);
     QFileInfoList files_list = current_dir.entryInfoList(QDir::NoFilter,QDir::DirsFirst);
     table_widget_vec[tab_index]->setRowCount(files_list.size());
+    vec_tab_path[tab_index] = current_dir.path();
+    ui->lineEdit_path->setText(vec_tab_path[tab_index]);
     int index = 0;
     foreach(auto copy , files_list){
         QTableWidgetItem *item_name = new QTableWidgetItem(copy.fileName());
@@ -163,61 +201,6 @@ void MainWindow::show_dir_table(QString path,int tab_index){
         table_widget_vec[tab_index]->setItem(index,0,item_name);
         index++;
     }
-}
-
-void MainWindow::table_double_clicked(QTableWidgetItem *item){
-    //QMessageBox::about(this,"",item->text());
-    show_dir_table(item->text(),ui->tabWidget->currentIndex());
-}
-
-
-
-void MainWindow::on_listWidget_files_itemDoubleClicked(QListWidgetItem *item)
-{
-    QString item_name = "/" + item->text();
-    QFileInfo info(current_dir.absolutePath() + item_name);
-    QUrl fileurl = QUrl::fromLocalFile(info.absoluteFilePath());
-    if(info.isDir()){
-        show_dir(item->text(),ui->tabWidget->currentIndex());
-    }else{
-        QDesktopServices::openUrl(fileurl);
-    }
-}
-
-void MainWindow::show_dir(QString path,int tab_index){
-    current_dir.cd(path);
-    vec_tab_path[tab_index] = current_dir.path();
-    ui->lineEdit_path->setText(vec_tab_path[tab_index]);
-    list_widget_vec[tab_index]->clear(); //ui->listWidget_files->clear();
-    list_widget_vec[tab_index]->setIconSize(QSize(32,32));
-
-    QFileInfoList file_list = current_dir.entryInfoList(QDir::NoFilter,QDir::SortFlag::DirsFirst | QDir::SortFlag::Name | QDir::SortFlag::IgnoreCase).toList();
-    foreach(auto copy, file_list){
-        if(copy.fileName() != "."){
-            QFileInfo info(current_dir.path()+ "/" + copy.fileName());
-            QListWidgetItem *item = new QListWidgetItem(copy.fileName());
-            if(info.isDir()){
-                item->setIcon(QIcon::fromTheme("folder"));
-            }else if(info.isFile()){
-                quint64 tamanho_bytes = info.size();
-                double tamanho_kb = info.size() / 1024;
-                double tamanho_mb = double(info.size()) / (1024 * 1024);
-                if(info.size() < 1000){
-                    item->setToolTip(QString::number(tamanho_bytes) + " bytes");
-                }else if(info.size() > 1000 && info.size() < 1000000){
-                    item->setToolTip(QString::number(tamanho_kb) + " kb");
-                }else{
-                    item->setToolTip(QString::number(tamanho_mb,'f',2) + " mb");
-                }
-
-                item->setIcon(QIcon::fromTheme("text-x-generic"));
-            }
-            list_widget_vec[tab_index]->addItem(item);
-
-            //list_widget_vec[tab_index]->sortItems(Qt::SortOrder::AscendingOrder);
-        }
-    }
-
 }
 
 void MainWindow::show_libs(){
@@ -497,7 +480,7 @@ void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
 {
     QString search_text = arg1;
     list_widget_vec[ui->tabWidget->currentIndex()]->clear();
-    foreach(auto copy,current_dir.entryList()){
+    foreach(auto copy,current_dir.entryList(QDir::NoFilter,QDir::DirsFirst | QDir::Name)){
         if(copy != "."){
             if(copy.contains(search_text)){
                 QFileInfo info(current_dir.path()+ "/" + copy);
@@ -545,4 +528,5 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     ui->lineEdit_path->setText(vec_tab_path[index]);
     show_dir(vec_tab_path[index],index);
 }
+
 

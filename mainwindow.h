@@ -6,6 +6,11 @@
 #include <qlistwidget.h>
 #include <qtablewidget.h>
 
+enum WIDGET_TYPE{
+    LIST_WIDGET,
+    TABLE_WIDGET
+};
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -26,7 +31,6 @@ private:
     QVector<QString>saved_paths;
     Ui::MainWindow *ui;
     void make_listwidget();
-    void make_tablewidget();
     QVector<QListWidget*>list_widget_vec;
     QVector<QTableWidget*>table_widget_vec;
     QVector<QString>vec_tab_path;

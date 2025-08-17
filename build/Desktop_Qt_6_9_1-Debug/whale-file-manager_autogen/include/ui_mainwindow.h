@@ -29,6 +29,8 @@ class Ui_MainWindow
 {
 public:
     QAction *actioncopy;
+    QAction *actionlist;
+    QAction *actiontable;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout_6;
     QVBoxLayout *verticalLayout;
@@ -47,11 +49,11 @@ public:
     QHBoxLayout *horizontalLayout;
     QLineEdit *lineEdit_path;
     QPushButton *pushButton_go;
+    QLineEdit *lineEdit_search;
+    QTabWidget *tabWidget;
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButton_make_folder;
     QPushButton *pushButton_make_file;
-    QLineEdit *lineEdit_search;
-    QTabWidget *tabWidget;
     QPushButton *pushButton_rename;
     QHBoxLayout *horizontalLayout_4;
     QPushButton *pushButton_move;
@@ -65,7 +67,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(709, 829);
+        MainWindow->resize(709, 860);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -76,6 +78,10 @@ public:
         actioncopy = new QAction(MainWindow);
         actioncopy->setObjectName("actioncopy");
         actioncopy->setMenuRole(QAction::MenuRole::NoRole);
+        actionlist = new QAction(MainWindow);
+        actionlist->setObjectName("actionlist");
+        actiontable = new QAction(MainWindow);
+        actiontable->setObjectName("actiontable");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         horizontalLayout_6 = new QHBoxLayout(centralwidget);
@@ -182,6 +188,18 @@ public:
 
         verticalLayout_2->addLayout(horizontalLayout);
 
+        lineEdit_search = new QLineEdit(centralwidget);
+        lineEdit_search->setObjectName("lineEdit_search");
+        lineEdit_search->setStyleSheet(QString::fromUtf8(""));
+        lineEdit_search->setClearButtonEnabled(true);
+
+        verticalLayout_2->addWidget(lineEdit_search);
+
+        tabWidget = new QTabWidget(centralwidget);
+        tabWidget->setObjectName("tabWidget");
+
+        verticalLayout_2->addWidget(tabWidget);
+
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
         pushButton_make_folder = new QPushButton(centralwidget);
@@ -196,18 +214,6 @@ public:
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);
-
-        lineEdit_search = new QLineEdit(centralwidget);
-        lineEdit_search->setObjectName("lineEdit_search");
-        lineEdit_search->setStyleSheet(QString::fromUtf8(""));
-        lineEdit_search->setClearButtonEnabled(true);
-
-        verticalLayout_2->addWidget(lineEdit_search);
-
-        tabWidget = new QTabWidget(centralwidget);
-        tabWidget->setObjectName("tabWidget");
-
-        verticalLayout_2->addWidget(tabWidget);
 
         pushButton_rename = new QPushButton(centralwidget);
         pushButton_rename->setObjectName("pushButton_rename");
@@ -277,6 +283,8 @@ public:
 #if QT_CONFIG(tooltip)
         actioncopy->setToolTip(QCoreApplication::translate("MainWindow", "none", nullptr));
 #endif // QT_CONFIG(tooltip)
+        actionlist->setText(QCoreApplication::translate("MainWindow", "list", nullptr));
+        actiontable->setText(QCoreApplication::translate("MainWindow", "table", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Rapid Access:", nullptr));
         pushButton_addcustom->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         pushButton_custom_delete->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
@@ -286,11 +294,11 @@ public:
         label_devices->setText(QCoreApplication::translate("MainWindow", "Mounted Devices:", nullptr));
         lineEdit_path->setText(QCoreApplication::translate("MainWindow", "Path", nullptr));
         pushButton_go->setText(QCoreApplication::translate("MainWindow", "GO", nullptr));
-        pushButton_make_folder->setText(QCoreApplication::translate("MainWindow", "MAKE FOLDER", nullptr));
-        pushButton_make_file->setText(QCoreApplication::translate("MainWindow", "MAKE FILE", nullptr));
         lineEdit_search->setInputMask(QString());
         lineEdit_search->setText(QString());
         lineEdit_search->setPlaceholderText(QCoreApplication::translate("MainWindow", "Search", nullptr));
+        pushButton_make_folder->setText(QCoreApplication::translate("MainWindow", "MAKE FOLDER", nullptr));
+        pushButton_make_file->setText(QCoreApplication::translate("MainWindow", "MAKE FILE", nullptr));
         pushButton_rename->setText(QCoreApplication::translate("MainWindow", "RENAME", nullptr));
         pushButton_move->setText(QCoreApplication::translate("MainWindow", "Crop", nullptr));
         pushButton_pastemove->setText(QCoreApplication::translate("MainWindow", "Paste Crop", nullptr));
